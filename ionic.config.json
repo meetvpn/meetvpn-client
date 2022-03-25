@@ -1,0 +1,7 @@
+{
+  "name": "MeetVPN",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

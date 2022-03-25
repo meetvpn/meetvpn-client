@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MeetVPN</string>
+    <string name="title_activity_main">MeetVPN</string>
+    <string name="package_name">com.meetvpn.app</string>
+    <string name="custom_url_scheme">com.meetvpn.app</string>
+</resources>

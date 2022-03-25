@@ -1,0 +1,6 @@
+{
+	"appId": "com.meetvpn.app",
+	"appName": "MeetVPN",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
