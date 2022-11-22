@@ -1,0 +1,7 @@
+{
+  "name": "meetvpn-client",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

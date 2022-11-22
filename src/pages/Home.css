@@ -1,0 +1,22 @@
+/* .home-header {
+    margin-top: 20px;
+} */
+
+.home-header-first-column {
+    align-self: center;
+}
+
+.home-header-image {
+    width: 70px;
+    height: 70px;
+}
+
+.home-power-button {
+    width: 200px;
+    height: 200px;
+}
+
+.home-power-icon {
+    width: 136px;
+    height: 136px;
+}
