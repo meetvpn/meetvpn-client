@@ -1,0 +1,52 @@
+ion-content {
+  --padding-bottom: 41px;
+  --padding-top: 60px;
+  --padding-end: 24px;
+  --padding-start: 24px;
+}
+
+ion-content .login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+ion-img {
+  width: 66.23px;
+  margin: 0 auto;
+}
+
+ion-text.welcome-text {
+  margin: 10px 0 40px;
+  display: block;
+}
+
+ion-button.login {
+  margin: 30px 0 20px;
+}
+
+ion-button.forgot-id {
+  margin-left: auto;
+  width: fit-content;
+  display: block;
+}
+
+ion-button.forgot-id,
+ion-button.button-clear {
+  --ripple-color: transparent;
+}
+
+ion-input.custom {
+  width: 100%;
+  margin: 12px 0 10px;
+}
+
+ion-button.button-clear {
+  font-weight: var(--ion-paragraph-font-weight);
+  height: 26px;
+  --background-hover-opacity: 0;
+  --background-activated-opacity: 1;
+  --background-focused-opacity: 1;
+  --transition: none;
+}

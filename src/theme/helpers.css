@@ -1,0 +1,62 @@
+/* Custom variables */
+:root {
+  --box-shadow: none;
+  --ion-font-family: "Poppins", sans-serif;
+  --ion-headings-font-weight: 500;
+  --ion-paragraph-font-weight: 300;
+
+  /* Buttons vars */
+  --btn-font-size: 14px;
+  --btn-font-weight: 500;
+  --btn-line-height: 21px;
+  --btn-height: 61px;
+  --btn-text-transform: none;
+  --btn-margin: 0;
+}
+
+/* Custom helper classes */
+.button {
+  --box-shadow: none;
+  --border-radius: 12px;
+  margin: var(--btn-margin);
+  height: var(--btn-height);
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
+  text-transform: var(--btn-text-transform);
+  --background-hover: none;
+  letter-spacing: normal;
+}
+
+.button-outline {
+  --border-width: 1px;
+}
+
+.title {
+  font-family: "Bebas Neue";
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 140%;
+  margin: 0;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 26px;
+  margin: 0;
+}
+
+/* Custom input styles */
+ion-input.custom {
+  --background: var(--ion-color-light);
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-font-weight: 300;
+  --placeholder-font-style: normal;
+  --padding-bottom: 19px;
+  --padding-end: 17px;
+  --padding-start: 17px;
+  --padding-top: 19px;
+  border-radius: 12px;
+}
