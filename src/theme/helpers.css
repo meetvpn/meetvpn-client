@@ -1,0 +1,161 @@
+/* Custom variables */
+@font-face {
+  font-family: "Bebas Neue";
+  font-style: normal;
+  font-weight: normal;
+  src: url(../assets/fonts/Bebas_Neue/BebasNeue-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 300;
+  src: url(../assets/fonts/Poppins/Poppins-Light.ttf);
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  src: url(../assets/fonts/Poppins/Poppins-Regular.ttf);
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  src: url(../assets/fonts/Poppins/Poppins-Medium.ttf);
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  src: url(../assets/fonts/Poppins/Poppins-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 700;
+  src: url(../assets/fonts/Poppins/Poppins-Bold.ttf);
+}
+
+:root {
+  /*  */
+  --ion-color-tab-item: #d8d8d8;
+  --box-shadow: none;
+  --ion-font-family: "Poppins", sans-serif;
+  --ion-headings-font-weight: 500;
+  --ion-paragraph-font-weight: 300;
+  --margin-divider: 30px 0;
+
+  /* Buttons vars */
+  --btn-font-size: 14px;
+  --btn-font-weight: 500;
+  --btn-line-height: 21px;
+  --btn-height: 61px;
+  --btn-text-transform: none;
+  --btn-margin: 0;
+}
+
+/* Custom helper classes */
+.button {
+  --box-shadow: none;
+  --border-radius: 12px;
+  margin: var(--btn-margin);
+  height: var(--btn-height);
+  font-size: var(--btn-font-size);
+  line-height: var(--btn-line-height);
+  text-transform: var(--btn-text-transform);
+  --background-hover: none;
+  letter-spacing: normal;
+}
+
+.button-outline {
+  --border-width: 1px;
+}
+
+.title {
+  font-family: "Bebas Neue";
+  padding: 0;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 140%;
+  margin: 0;
+}
+
+.subtitle {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 26px;
+  margin: 0;
+}
+
+/* Custom input styles */
+ion-label.subtitle {
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+ion-input.custom {
+  --color: var(--ion-color-dark);
+  --background: var(--ion-color-light);
+  --placeholder-color: var(--ion-color-medium);
+  --placeholder-opacity: 1;
+  --placeholder-font-weight: 300;
+  --placeholder-font-style: normal;
+  --padding-bottom: 0;
+  --padding-end: 17px;
+  --padding-start: 17px;
+  --padding-top: 0;
+  border-radius: 12px;
+  font-weight: 500;
+  height: 60px;
+}
+
+input::placeholder {
+  font-size: 14px;
+  line-height: 26px;
+  font-weight: 300;
+}
+
+/* Styles for ion-tab-bar */
+ion-tab-bar {
+  --border: none;
+  --background: none;
+  height: 76px;
+  gap: 4px;
+}
+
+ion-tab-button {
+  --color: #d8d8d8;
+  --background-focused: #3dbaa1;
+  --color-selected: #3dbaa1;
+  --ripple-color: transparent;
+}
+
+ion-tab-button ion-icon {
+  width: 100%;
+}
+
+.d-block {
+  display: block;
+}
+
+.margin-top-30 {
+  margin-top: 30px;
+}
+
+.margin-bottom-48 {
+  margin-bottom: 48px;
+}
+
+.divider {
+  height: 1px;
+  width: 100%;
+  background: #e6e6e6;
+  border-radius: 12px;
+  margin: var(--margin-divider);
+}

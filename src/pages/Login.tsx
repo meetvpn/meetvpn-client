@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonInput, IonItem, IonLabel, IonNote, IonRow, IonCol, IonButton } from '@ionic/react';
+import React, {useState} from 'react';
+import {IonPage, IonImg, IonText, IonContent, IonInput, IonLabel, IonButton} from '@ionic/react';
 
-import './Login.css';
+import MeetVPNIco from "../assets/icon/meet-vpn.svg";
+
+import "./Login.css";
 
 const Login: React.FC = () => {
     const [isTouched, setIsTouched] = useState(false);
@@ -36,50 +38,73 @@ const Login: React.FC = () => {
         // if(!password) {
         //   setPasswordError(true);
         // }
-    
+
         // if(username && password) {
         //   await setIsLoggedIn(true);
         //   await setUsernameAction(username);
         //   history.push('/tabs/schedule', {direction: 'none'});
         // }
-      };
+    };
 
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>Login</IonTitle>
-                </IonToolbar>
-            </IonHeader>
             <IonContent fullscreen>
-                <IonHeader collapse="condense">
-                    <IonToolbar>
-                        <IonTitle size="large">Login</IonTitle>
-                    </IonToolbar>
-                </IonHeader>
+                <div className="login-container">
+                    <IonImg src={MeetVPNIco} alt="logo-meet-vpn"/>
 
-                <form noValidate onSubmit={login}>
-                    <IonItem fill="solid" className={`${isValid && 'ion-valid'} ${isValid === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}>
-                        <IonLabel position="stacked">Account Key</IonLabel>
-                        <IonInput type="number" placeholder='0000-0000-0000-0000' onIonInput={(event) => validate(event)} onIonBlur={() => markTouched()}></IonInput>
-                        <IonNote slot="helper">Enter a valid key</IonNote>
-                        <IonNote slot="error">Invalid key</IonNote>
-                    </IonItem>
+                    <div>
+                        <IonText color="dark">
+                            <h3 className="title">Log in</h3>
+                        </IonText>
 
-                    <IonRow>
-                        <IonCol>
-                            <IonButton type="submit" expand="block">Log in</IonButton>
-                        </IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol>
-                            <IonButton routerLink="/tabs/account-created" color="light" expand="block">Craete Account</IonButton>
-                        </IonCol>
-                    </IonRow>
-                </form>
+                        <IonText color="medium" className="welcome-text">
+                            <p className="subtitle">Welcome back You've been missed!</p>
+                        </IonText>
+
+                        <form noValidate onSubmit={login}>
+                            <IonLabel color="dark" className="subtitle">
+                                Account ID
+                            </IonLabel>
+                            <IonInput
+                                className="custom"
+                                type="number"
+                                placeholder="Enter  your account ID"
+                                onIonInput={(event) => validate(event)}
+                                onIonBlur={() => markTouched()}
+                            ></IonInput>
+                            <IonButton
+                                color="medium"
+                                fill="clear"
+                                routerLink="/tabs/home"
+                                className="forgot-id"
+                            >
+                                Forget your ID?
+                            </IonButton>
+
+                            <IonButton
+                                color="success"
+                                type="submit"
+                                expand="block"
+                                className="login"
+                            >
+                                Log in
+                            </IonButton>
+                            <IonButton
+                                routerLink="/tabs/account-created"
+                                expand="block"
+                                fill="outline"
+                            >
+                                Craete Account
+                            </IonButton>
+                        </form>
+                    </div>
+
+                    <IonButton color="success" fill="clear">
+                        Restore Purchases
+                    </IonButton>
+                </div>
             </IonContent>
         </IonPage>
-
     );
 };
 
