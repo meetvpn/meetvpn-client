@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonItem, IonLabel, IonInput, IonButton, IonIcon, IonList, IonNote, IonRow, IonCol, IonRouterLink } from '@ionic/react';
+import { IonContent, IonText, IonPage, IonImg, IonLabel, IonInput, IonButton, IonIcon } from '@ionic/react';
 import { Clipboard } from '@capacitor/clipboard';
 
 import GoToHome from '../components/GoToHome';
 
 import DocumentCopyIcon from '../assets/icon/document-copy.svg';
+import MeetVPNIco from "../assets/icon/meet-vpn.svg";
 
 import './AccountCreated.css';
 
@@ -63,46 +64,64 @@ const AccountCreated: React.FC = () => {
 
     return (
         <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle>AccountCreated</IonTitle>
-                </IonToolbar>
-            </IonHeader>
             <IonContent fullscreen>
-                <IonHeader collapse="condense">
-                    <IonToolbar>
-                        <IonTitle size="large">AccountCreated</IonTitle>
-                    </IonToolbar>
-                </IonHeader>
-                <form noValidate onSubmit={addEmail}>
-                    <IonList>
-                        <IonItem>
-                            <IonLabel position='stacked'>Use the following Key to get started</IonLabel>
-                            <IonInput value="0000-0000-0000-0000" disabled={true}></IonInput>
-                            <IonButton fill="outline" >
-                                Copy Key
-                                <IonIcon slot="end" src={DocumentCopyIcon}></IonIcon>
-                            </IonButton>
-                        </IonItem>
-                        <IonItem fill="solid" className={`${isValid && 'ion-valid'} ${isValid === false && 'ion-invalid'} ${isTouched && 'ion-touched'}`}>
-                            <IonLabel position="stacked">Add your Email for recovery your Acccount (Optional)</IonLabel>
-                            <IonInput type="email" placeholder='me@email.com' onIonInput={(event) => validate(event)} onIonBlur={() => markTouched()}></IonInput>
-                            <IonNote slot="helper">Enter a valid email</IonNote>
-                            <IonNote slot="error">Invalid email</IonNote>
-                        </IonItem>
-                    </IonList>
-                    <IonRow>
-                        <IonCol>
-                            <IonButton type="submit" expand="block">Add email</IonButton>
-                        </IonCol>
-                    </IonRow>
-                </form>
-
                 <div className="container">
-                    <p>Go to <IonRouterLink routerLink='/tabs/home'>Home</IonRouterLink></p>
-                </div>
+                    <IonImg src={MeetVPNIco} alt="logo-meet-vpn" />
 
-                <GoToHome />
+                    <div>
+                        <IonText color="dark" className="d-block margin-bottom-48">
+                            <h3 className="title">
+                                You HAVE
+                                <br /> SUCCESSFULLY CREATED YOUR ACCOUNT{" "}
+                            </h3>
+                        </IonText>
+
+                        <form noValidate onSubmit={addEmail}>
+                            <IonLabel color="dark" className="subtitle">
+                                Use the following Key to next login
+                            </IonLabel>
+
+                            <div className="input-group">
+                                <IonInput value="2568" disabled={true}></IonInput>
+                                <IonButton
+                                    fill="clear"
+                                    color="medium"
+                                    onClick={() => console.log("Copy to clickboard")}
+                                >
+                                    Copy Key
+                                    <IonIcon slot="end" src={DocumentCopyIcon}></IonIcon>
+                                </IonButton>
+                            </div>
+
+                            <div className="divider" />
+
+                            <div>
+                                <IonLabel color="dark" className="subtitle">
+                                    Add your Email for recovery your account
+                                </IonLabel>
+
+                                <IonInput
+                                    className="custom"
+                                    type="email"
+                                    placeholder="Email"
+                                    onIonInput={(event) => validate(event)}
+                                    onIonBlur={() => markTouched()}
+                                ></IonInput>
+                            </div>
+
+                            <IonButton
+                                type="submit"
+                                expand="block"
+                                color="success"
+                                className="margin-top-30"
+                            >
+                                Add email
+                            </IonButton>
+                        </form>
+                    </div>
+
+                    <GoToHome />
+                </div>
             </IonContent>
         </IonPage>
     );
