@@ -3,9 +3,9 @@ import './GoToHome.css';
 
 const GoToHome: React.FC = () => {
     return (
-        <div className="container">
-            <p>Go to <IonRouterLink routerLink='/tabs/home'>Home</IonRouterLink></p>
-        </div>
+        <p className="ion-text-center go-home">
+            Go to <IonRouterLink routerLink="/tabs/home">Home</IonRouterLink>
+        </p>
     );
 };
 
