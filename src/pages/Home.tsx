@@ -1,23 +1,54 @@
-import { IonContent, IonHeader, IonPage, IonToolbar, IonIcon, IonButton, IonGrid, IonRow, IonCol, IonText, IonButtons, IonTitle } from '@ionic/react';
-// import ExploreContainer from '../components/ExploreContainer';
-import SettingIcon from '../assets/icon/setting.svg';
+import React, {useState} from "react";
+
+import {
+  IonContent,
+  IonHeader,
+  IonPage,
+  IonToolbar,
+  IonIcon,
+  IonButton,
+  IonText,
+  IonButtons,
+  IonImg
+} from '@ionic/react';
+
+import SettingsIcon from '../assets/icon/settings.svg';
+import Options from '../assets/icon/more.svg'
 import PowerIcon from '../assets/icon/power.svg';
 
-// import MeetVPNImg from '../assets/img/MeetVPN.png';
+import MeetVPNIco from "../assets/icon/meet-vpn.svg";
 
 import './Home.css';
 
+type connectionStatus = 'connected' | 'disconnected' | 'connecting';
+
 const Home: React.FC = () => {
+  const status = useState<connectionStatus>('disconnected');
+
+  const handleConnect = ()=> {
+    console.log('Todo connection...');
+    // TODO: Change the status of connection to connecting, call the server and when i have response of server success change the status to connected.
+  }
+
   return (
     <IonPage>
-      <IonHeader className='home-header'>
-        <IonToolbar>
+      <IonHeader className='home-header ion-no-border'>
+        <IonToolbar className="header-container">
+
           <IonButtons slot="start">
-            <IonButton fill="clear">
-              <IonIcon slot="icon-only" src={SettingIcon} color="f5f5"/>
+            <IonButton color="light" className='header-icon'>
+              <IonIcon slot="icon-only" src={SettingsIcon} color="dark"/>
             </IonButton>
           </IonButtons>
-          <IonTitle>Home</IonTitle>
+
+          <IonImg src={MeetVPNIco} />
+
+          <IonButtons slot="end">
+            <IonButton color="light" className='header-icon'>
+              <IonIcon slot="icon-only" src={Options} color="dark"/>
+            </IonButton>
+          </IonButtons>
+
         </IonToolbar>
         {/* <IonToolbar>
           <IonRow>
@@ -33,31 +64,22 @@ const Home: React.FC = () => {
           </IonRow>
         </IonToolbar> */}
       </IonHeader>
-      <IonContent scrollY={false}>
-        <IonGrid className='home-grid'>
-          <IonRow className='home-grid-row'>
-            <IonCol size='8' offset='2'>
-              <IonText>Tap the button bellow to connect with the best server</IonText>
-            </IonCol>
-          </IonRow>
-          <IonRow className='home-grid-row'>
-            <IonCol size='8' offset='2'>
-              <IonButton className='home-power-button' size='large' fill="clear">
-                <IonIcon className='home-power-icon' slot="icon-only" icon={PowerIcon} />
-              </IonButton>
-            </IonCol>
-          </IonRow>
-          <IonRow className='home-grid-row'>
-            <IonCol size='8' offset='2'>
-              <IonText>Not Connected</IonText>
-            </IonCol>
-          </IonRow>
-          <IonRow>
-            <IonCol>
-              <IonButton expand="block">Discover Server</IonButton>
-            </IonCol>
-          </IonRow>
-        </IonGrid>
+
+      <IonContent className="home-container" scrollY={false}>
+        <div className='home-content'>
+
+          <IonText color='dark' className="subtitle">Tap the button bellow to connect</IonText>
+
+          <div className='btn-connect-container' >
+            <IonButton className='home-power-button' size='large' fill="clear" onClick={handleConnect}>
+              <IonIcon className='home-power-icon' slot="icon-only" icon={PowerIcon} />
+            </IonButton>
+            <IonText className="text-button">Not Connected</IonText>
+          </div>
+
+          <IonButton expand="block" color="success" className="btn-expand" >Discover Server</IonButton>
+
+        </div>
       </IonContent>
     </IonPage>
   );
