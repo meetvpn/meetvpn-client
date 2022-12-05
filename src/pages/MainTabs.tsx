@@ -14,7 +14,7 @@ import Favorite from './Favorite';
 import Profile from './Profile';
 import AccountCreated from "./AccountCreated";
 
-// import PrivateRoute from '../components/PrivateRoute';
+import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from "../components/PublicRoute";
 
 interface MainTabsProps { }
@@ -30,8 +30,8 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                     Use the component prop when your component depends on the RouterComponentProps passed in automatically.
                 */}
                 <Route path="/tabs/home" render={() => <Home />} exact={true} />
-                {/* <PrivateRoute component={ServerListPage} path="/tabs/servers" exact={true} /> */}
-                <Route component={ServerListPage} path="/tabs/servers" exact={true} />
+                <PrivateRoute component={ServerListPage} path="/tabs/servers" exact={true} />
+                {/* <Route component={ServerListPage} path="/tabs/servers" exact={true} /> */}
                 {/* <Route path="/tabs/servers" render={() => <ServerList />} exact={true} /> */}
                 <Route path="/tabs/servers/:id" component={ServerDetail} exact={true} />
                 <Route path="/tabs/favorite" render={() => <Favorite />} exact={true} />
