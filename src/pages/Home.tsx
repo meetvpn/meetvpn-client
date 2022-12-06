@@ -22,6 +22,7 @@ import PowerIcon from "../assets/icon/power.svg";
 import ConnectingIcon from "../assets/icon/connecting.svg";
 import ConnectedIcon from "../assets/icon/connected.svg";
 import MeetVPNIco from "../assets/icon/meet-vpn.svg";
+import ArgentinaFlag from '../assets/img/countries/argentina.svg';
 
 import "./Home.css";
 
@@ -114,7 +115,7 @@ const Home: React.FC = () => {
             <div className="connection-info-content">
               <ServerNetworkInfo transferType="Upload" amount="12.99" />
               <ServerNetworkInfo transferType="Download" amount="12.99" />
-              <ServerInfoCard name={name} ip={ip} premium={premium} ms={ms} />
+              <ServerInfoCard name={name} ip={ip} premium={premium} ms={ms} photo={ArgentinaFlag} />
             </div>
 
             <div className="btn-connecting-container">

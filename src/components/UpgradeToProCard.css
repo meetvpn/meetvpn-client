@@ -2,6 +2,7 @@ ion-card.upgrade-card-container {
   border-radius: 12px;
   padding: 20px 24px;
   box-shadow: none;
+  margin: 0;
 }
 
 ion-card.upgrade-card-container ion-card-header {
