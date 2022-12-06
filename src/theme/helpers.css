@@ -138,6 +138,7 @@ ion-tab-button {
 
 ion-tab-button ion-icon {
   width: 100%;
+  height: 0.9em;
 }
 
 .d-block {

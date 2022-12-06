@@ -1,0 +1,35 @@
+.network-info-card-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: 50%;
+  max-width: calc(50% - 10px);
+  background: var(--ion-color-light, #fafafa);
+  border-radius: var(--border-radius, 12px);
+  height: 70px;
+  padding: 10px;
+}
+
+.network-info-card-container ion-text {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 190%;
+  color: #333333;
+
+}
+
+.network-info-card-container .card-title span:nth-of-type(1) {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+  color: #333333;
+}
+
+.network-info-card-container .card-title span:nth-of-type(2) {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 190%;
+  color: #A8A8A8;
+  margin-left: 8px;
+}
+
