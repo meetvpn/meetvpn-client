@@ -1,0 +1,11 @@
+ion-content.server-list-page {
+  --padding-bottom: 20px;
+  --padding-top: 20px;
+}
+
+ion-toolbar.server-list-header {
+  height: 44px;
+  --min-height: 44px;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,27 @@
+.server-list-container {
+  margin-top: 32px;
+  padding: 0;
+}
+
+.server-list-container > ion-text {
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 140%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.server-list-container ion-button {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 190%;
+  --ion-paragraph-font-weight: 500;
+}
+
+.server-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}

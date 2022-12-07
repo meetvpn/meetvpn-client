@@ -1,24 +1,25 @@
-import { IonList, IonText } from '@ionic/react';
+import {IonList, IonText, IonButton} from '@ionic/react';
+import {ServerListProps} from "../interfaces";
 
-import ServerItem from './ServerItem';
+import ServerInfoCard from "./ServerInfoCard";
 
 import './ServerList.css';
 
-interface ServerListProps {
-    title: string;
-}
+const ServerList: React.FC<ServerListProps> = ({title, servers, premiumServers = false}) => (
+  <IonList className="server-list-container">
+    <IonText color="dark">
+      {title}
+      {premiumServers ?
+        <IonButton fill="clear" color="warning">Go premium</IonButton> :
+        <IonButton fill="clear" color="dark">View all</IonButton>}
+    </IonText>
 
-
-const ServerList: React.FC<ServerListProps> = ({ title }) => {
-    return (
-        <IonList>
-            <IonText> <h3>{title}</h3> </IonText>
-            <ServerItem />
-            <ServerItem />
-            <ServerItem />
-            <ServerItem />
-        </IonList>
-    );
-};
+    <div className="server-list">
+      {servers.map(server => (
+        <ServerInfoCard key={server.ip} {...server}/>
+      ))}
+    </div>
+  </IonList>
+)
 
 export default ServerList;

@@ -1,0 +1,38 @@
+ion-card.upgrade-card-container {
+  border-radius: 12px;
+  padding: 20px 24px;
+  box-shadow: none;
+  margin: 0;
+}
+
+ion-card.upgrade-card-container ion-card-header {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+ion-card.upgrade-card-container ion-card-header ion-icon {
+  height: 44px;
+  width: 44px;
+  flex-shrink: 0;
+}
+
+ion-card.upgrade-card-container ion-card-header ion-card-title {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+  margin-bottom: 2px;
+}
+
+ion-card.upgrade-card-container ion-card-header ion-card-subtitle {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 190%;
+}
+
+ion-button.btn-upgrade-now {
+  --background: rgba(255, 255, 255, 0.23);
+  height: 45px;
+}
