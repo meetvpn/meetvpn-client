@@ -14,7 +14,7 @@ import Favorite from './Favorite';
 import Profile from './Profile';
 import AccountCreated from "./AccountCreated";
 
-// import PrivateRoute from '../components/PrivateRoute';
+import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from "../components/PublicRoute";
 
 interface MainTabsProps { }
