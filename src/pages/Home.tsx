@@ -95,7 +95,7 @@ const Home: React.FC = () => {
               <IonText className="text-button">Not Connected</IonText>
             </div>
 
-            <IonButton expand="block" color="success" className="btn-expand">
+            <IonButton routerLink="/tabs/servers" expand="block" color="success" className="btn-expand">
               Discover Server
             </IonButton>
           </div>
@@ -126,8 +126,7 @@ const Home: React.FC = () => {
                     fill="clear"
                     onClick={connected ? handleDisconnect : handleConnect}
                 >
-                  <IonIcon className="home-power-icon" slot="icon-only" icon={connected ? ConnectedIcon : ConnectingIcon}
-                  />
+                  <IonIcon className="home-power-icon" slot="icon-only" icon={connected ? ConnectedIcon : ConnectingIcon}/>
                 </IonButton>
                 <IonText className="text-button">
                   {connected ? "Connected" : "Connecting"}

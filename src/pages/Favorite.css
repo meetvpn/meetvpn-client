@@ -1,0 +1,20 @@
+ion-toolbar.server-list-header ion-back-button {
+  height: 24px;
+  width: 24px;
+}
+
+.server-list-header ion-buttons.back-btn-container {
+  width: 24px;
+}
+
+ion-back-button::part(native) {
+  padding: 0;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+}
+
+ion-back-button::part(icon) {
+  margin: 0;
+  width: 24px;
+}
