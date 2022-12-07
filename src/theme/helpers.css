@@ -44,6 +44,7 @@
 :root {
   /*  */
   --ion-color-tab-item: #d8d8d8;
+  --ion-color-label-item: #989898;
   --box-shadow: none;
   --ion-font-family: "Poppins", sans-serif;
   --ion-headings-font-weight: 500;

@@ -10,7 +10,7 @@ type transferType = "Upload" | "Download";
 
 export interface IServerNetworkInfo {
   transferType: transferType
-  amount: string,
+  amount: string
 }
 
 export interface ServerListProps {
