@@ -25,7 +25,7 @@ const Favorite: React.FC = () => {
     // Get all servers
     setTimeout(() => {
       setServers(serverList);
-    }, 1000)
+    }, 500)
   }, []);
 
   return (

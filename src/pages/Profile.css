@@ -1,0 +1,55 @@
+.ion-buttons.test {
+  width: 44px !important;
+}
+
+.profile-info-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-info-container ion-label {
+  display: block;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 190%;
+  color: var(--ion-color-label-item);
+}
+
+.profile-info-container ion-text {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 190%;
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.input-container ion-icon {
+  width: 22px;
+  height: 22px;
+  margin-left: 10px;
+}
+
+ion-button.cancel-pro-btn::part(native) {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 140%;
+  color: #dd3923;
+  padding: 0;
+  width: auto;
+}
+
+ion-text.cancel-pro-btn {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 22px;
+  color: #ef5743;
+}
+
+ion-button.logout {
+  margin-top: 50px;
+}
