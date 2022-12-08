@@ -66,7 +66,7 @@ const Home: React.FC = () => {
       <IonHeader className="home-header ion-no-border">
         <IonToolbar className="header-container">
           <IonButtons slot="start">
-            <IonButton color="light" className="header-icon">
+            <IonButton routerLink="/tabs/settings" color="light" className="header-icon">
               <IonIcon slot="icon-only" src={SettingsIcon} color="dark" />
             </IonButton>
           </IonButtons>
@@ -95,7 +95,7 @@ const Home: React.FC = () => {
               <IonText className="text-button">Not Connected</IonText>
             </div>
 
-            <IonButton routerLink="/tabs/servers" expand="block" color="success" className="btn-expand">
+            <IonButton routerLink="/tabs/settings" expand="block" color="success" className="btn-expand">
               Discover Server
             </IonButton>
           </div>
