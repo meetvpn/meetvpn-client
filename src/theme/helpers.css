@@ -161,3 +161,11 @@ ion-tab-button ion-icon {
   border-radius: 12px;
   margin: var(--margin-divider);
 }
+
+/* Display flex helper classes */
+.screen-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

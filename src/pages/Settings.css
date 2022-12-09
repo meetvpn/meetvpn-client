@@ -1,0 +1,30 @@
+.settings-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+ion-list.settings-container ion-item::part(native) {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 190%;
+  border-radius: 12px;
+  height: 60px;
+  padding: 0 20px;
+  --inner-padding-end: 0
+}
+
+ion-list.settings-container ion-item > ion-label {
+  margin: 0;
+}
+
+ion-button.btn-done::part(native) {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 190%;
+  padding: 0
+}
+
+.divider {
+  --margin-divider: 10px 0;
+}

@@ -13,6 +13,7 @@ import ServerDetail from './ServerDetail';
 import Favorite from './Favorite';
 import Profile from './Profile';
 import AccountCreated from "./AccountCreated";
+import Settings from "./Settings";
 
 import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from "../components/PublicRoute";
@@ -36,6 +37,7 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                 <Route path="/tabs/servers/:id" component={ServerDetail} exact={true} />
                 <Route path="/tabs/favorite" render={() => <Favorite />} exact={true} />
                 <Route path="/tabs/profile" render={() => <Profile />} exact={true} />
+                <Route path="/tabs/settings" render={() => <Settings />} exact={true} />
                 <PublicRoute restricted={true} component={AccountCreated} path="/tabs/account-created" exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
