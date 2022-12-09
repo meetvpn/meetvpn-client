@@ -1,26 +1,26 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   IonContent,
   IonHeader,
   IonPage,
   IonButtons,
-  IonTitle,
+  IonText,
   IonToolbar,
   IonButton,
-  IonIcon
-} from '@ionic/react';
+  IonIcon,
+} from "@ionic/react";
 
-import UpgradeToProCard from '../components/UpgradeToProCard';
-import ServerList from '../components/ServerList';
-import {IServerInfoDetails} from "../interfaces";
+import UpgradeToProCard from "../components/UpgradeToProCard";
+import ServerList from "../components/ServerList";
+import { IServerInfoDetails } from "../interfaces";
 
-import ArgentinaImg from '../assets/img/countries/argentina.svg';
-import BelgiumFlag from '../assets/img/countries/belgium.svg';
-import AlbaniaFlag from '../assets/img/countries/belgium.svg';
+import ArgentinaImg from "../assets/img/countries/argentina.svg";
+import BelgiumFlag from "../assets/img/countries/belgium.svg";
+import AlbaniaFlag from "../assets/img/countries/belgium.svg";
 import Candle from "../assets/icon/candle.svg";
 
-import './ServerListPage.css';
+import "./ServerListPage.css";
 
 const serverList: IServerInfoDetails[] = [
   {name: 'Albania', ip: '24.12.001.124', premium: false, ms: '44 MS', photo: AlbaniaFlag},
@@ -32,44 +32,43 @@ const serverList: IServerInfoDetails[] = [
 ]
 
 const ServerListPage: React.FC = () => {
-  const [servers, setServers] = useState<IServerInfoDetails[]>([])
+  const [servers, setServers] = useState<IServerInfoDetails[]>([]);
 
   useEffect(() => {
     // Get all servers
     setTimeout(() => {
       setServers(serverList);
-    }, 500)
+    }, 500);
   }, []);
-
 
   return (
     <IonPage>
       <IonHeader className="home-header ion-no-border">
-        <IonToolbar className='server-list-header'>
-          <IonTitle color="dark" className="title">Discover server</IonTitle>
+        <IonToolbar className="server-list-header">
+          <IonText color="dark" className="title">
+            Discover server
+          </IonText>
 
           <IonButtons slot="end">
             <IonButton color="light" className="header-icon">
-              <IonIcon slot="icon-only" src={Candle} color="dark"/>
+              <IonIcon slot="icon-only" src={Candle} color="dark" />
             </IonButton>
           </IonButtons>
-
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="server-list-page">
-        <UpgradeToProCard/>
+        <UpgradeToProCard />
 
         <ServerList
-          title='Free Servers'
-          servers={servers.filter(server => !server.premium)}
+          title="Free Servers"
+          servers={servers.filter((server) => !server.premium)}
         />
 
         <ServerList
-          title='Premium Servers'
-          servers={servers.filter(server => server.premium)}
+          title="Premium Servers"
+          servers={servers.filter((server) => server.premium)}
           premiumServers={true}
         />
-
       </IonContent>
     </IonPage>
   );
