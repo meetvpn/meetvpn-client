@@ -5,8 +5,7 @@
 
 ion-header.home-header {
   padding: 32px 24px 0;
-  --background: transparent;
-  background: #ffff;
+  --ion-toolbar-background: #fff;
 }
 
 ion-header.home-header ion-toolbar.header-container {

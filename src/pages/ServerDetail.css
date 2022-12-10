@@ -1,0 +1,42 @@
+ion-header.header-container {
+  padding: 32px 24px 0;
+}
+
+.toolbar-header-container {
+  --ion-toolbar-background: #fff;
+}
+
+.server-info {
+  width: 150px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.server-flag {
+  --size: 80px;
+  --border-radius: 50%;
+  margin: 0 auto 24px;
+}
+
+.server-name {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 140%;
+  text-align: center;
+  width: 100%;
+}
+
+.server-ip {
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 190%;
+}
+
+ion-list.details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 32px;
+}

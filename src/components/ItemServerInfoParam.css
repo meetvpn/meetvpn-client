@@ -1,0 +1,43 @@
+ion-item.item-container::part(native) {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 190%;
+  border-radius: 12px;
+  height: 79px;
+  padding: 0 24px;
+  --inner-padding-end: 0;
+}
+
+ion-item.item-container ion-icon {
+  height: 24px;
+  width: 24px;
+}
+
+.info {
+  width: 108px;
+  margin-left: auto;
+  height: 100%;
+}
+
+.ion-text.type-transfer {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 190%;
+}
+
+ion-text.transfer-value {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 140%;
+}
+
+ion-text.transfer-value p {
+  margin: 0;
+}
+
+ion-text.transfer-value span {
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 190%;
+  color: #a8a8a8;
+}
