@@ -1,0 +1,11 @@
+.splash-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.splash-container ion-img {
+  width: 102px;
+  height: 86px
+}
