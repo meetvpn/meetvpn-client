@@ -17,6 +17,9 @@ import Settings from "./Settings";
 
 import PrivateRoute from '../components/PrivateRoute';
 import PublicRoute from "../components/PublicRoute";
+import SettingsAccount from "./SettingAccount";
+import FaqAndGuides from "./FaqAndGuides";
+import ReportProblem from "./ReportProblem";
 
 interface MainTabsProps { }
 
@@ -38,6 +41,9 @@ const MainTabs: React.FC<MainTabsProps> = () => {
                 <Route path="/tabs/favorite" render={() => <Favorite />} exact={true} />
                 <Route path="/tabs/profile" render={() => <Profile />} exact={true} />
                 <Route path="/tabs/settings" render={() => <Settings />} exact={true} />
+                <Route path="/tabs/settings/account" render={() => <SettingsAccount />} exact={true} />
+                <Route path="/tabs/settings/report-problem" render={() => <ReportProblem />} exact={true} />
+                <Route path="/tabs/settings/faq" render={() => <FaqAndGuides />} exact={true} />
                 <PublicRoute restricted={true} component={AccountCreated} path="/tabs/account-created" exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
