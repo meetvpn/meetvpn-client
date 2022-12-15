@@ -41,7 +41,7 @@ const SettingsAccount: React.FC = () => {
             </IonLabel>
 
             <div className="input-group">
-              <IonInput value="2568" />
+              <IonInput value="2568" disabled={true} />
               <IonButton
                 fill="clear"
                 color="medium"
