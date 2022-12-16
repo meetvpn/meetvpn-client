@@ -15,6 +15,7 @@ import { AuthProvider } from "./AuthProvider";
 
 import MainTabs from './pages/MainTabs';
 import Login from "./pages/Login";
+import SplashPage from "./pages/SplashPage";
 
 import PublicRoute from "./components/PublicRoute";
 
@@ -46,6 +47,7 @@ const App: React.FC = () => (
       <IonReactRouter>
         <IonRouterOutlet id="main">
           <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
+          <PublicRoute component={SplashPage} path="/splash" exact={true} />
           <Route path="/tabs" render={() => <MainTabs />} />
           <Route exact path="/" render={() => <Redirect to="/tabs/home" />} />
         </IonRouterOutlet>
