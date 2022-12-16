@@ -10,8 +10,12 @@ import {
   IonHeader,
   IonPage,
   IonToolbar,
+  IonRouterLink,
 } from "@ionic/react";
 import { useAuth } from "../AuthProvider";
+import RedirectIcon from '../assets/icon/redirect.svg';
+import ArrowIcon from '../assets/icon/arrow-right.svg';
+
 import "./Settings.css";
 
 const Settings: React.FC = () => {
@@ -46,27 +50,27 @@ const Settings: React.FC = () => {
       <IonContent fullscreen className="server-list-page">
         <div className="screen-content">
           <IonList className="settings-container">
-            <IonItem button lines="none" color="light">
-              <IonLabel color="dark">Account</IonLabel>
-            </IonItem>
-            <IonItem button color="light" lines="none">
-              <IonLabel color="dark">Preferences</IonLabel>
-            </IonItem>
-            <IonItem button color="light" lines="none">
-              <IonLabel color="dark">Wire Guard Key</IonLabel>
-            </IonItem>
+            <IonRouterLink routerLink="/tabs/settings/account">
+              <IonItem button lines="none" color="light" detail={true} detailIcon={ArrowIcon}>
+                <IonLabel color="dark">Account</IonLabel>
+              </IonItem>
+            </IonRouterLink>
             <IonItem color="light" lines="none">
               <IonLabel color="dark">App Version</IonLabel>
               <IonText>2022.2</IonText>
             </IonItem>
             <div className="divider" />
-            <IonItem button color="light" lines="none">
-              <IonLabel color="dark">Report a problem</IonLabel>
-            </IonItem>
+            <IonRouterLink routerLink="/tabs/settings/report-problem">
+              <IonItem button color="light" lines="none" detail={true} detailIcon={ArrowIcon}>
+                <IonLabel color="dark">Report a problem</IonLabel>
+              </IonItem>
+            </IonRouterLink>
             <div className="divider" />
-            <IonItem button color="light" lines="none">
-              <IonLabel color="dark">FAQ & Guides</IonLabel>
-            </IonItem>
+            <IonRouterLink routerLink="/tabs/settings/faq">
+              <IonItem button color="light" lines="none" detail={true} detailIcon={RedirectIcon}>
+                <IonLabel color="dark">FAQ & Guides</IonLabel>
+              </IonItem>
+            </IonRouterLink>
           </IonList>
 
           <IonButton
