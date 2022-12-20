@@ -4,6 +4,7 @@
 }
 
 ion-header.home-header {
+  background: #ffffff;
   padding: 32px 24px 0;
   --ion-toolbar-background: #fff;
 }
