@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">meetvpn-client</string>
-    <string name="title_activity_main">meetvpn-client</string>
+    <string name="app_name">MeetVPN</string>
+    <string name="title_activity_main">MeetVPN</string>
     <string name="package_name">meetvpn.client</string>
     <string name="custom_url_scheme">meetvpn.client</string>
 </resources>
