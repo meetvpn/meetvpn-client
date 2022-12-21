@@ -13,10 +13,11 @@ dependencies {
     implementation project(':capacitor-clipboard')
     implementation project(':capacitor-haptics')
     implementation project(':capacitor-keyboard')
+    implementation project(':capacitor-preferences')
     implementation project(':capacitor-status-bar')
 
 }
-
+apply from: "../../node_modules/cordova-plugin-outline/android/java/build-extras.gradle"
 
 if (hasProperty('postBuildExtras')) {
   postBuildExtras()

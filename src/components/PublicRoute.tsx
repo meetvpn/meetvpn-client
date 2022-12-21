@@ -1,5 +1,5 @@
 import { Route, Redirect } from "react-router-dom";
-import { useAuth } from "../AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 
 const PublicRoute = ({ component: Component, restricted, ...rest }: any) => {
     const auth = useAuth();

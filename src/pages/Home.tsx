@@ -12,6 +12,8 @@ import {
   IonImg,
 } from "@ionic/react";
 
+import { OutlineStatus, useOutline } from "../providers/OutlineProvider";
+
 import { IServerInfoDetails } from "../interfaces";
 import ServerInfoCard from "../components/ServerInfoCard";
 import ServerNetworkInfo from "../components/ServerNetworkInfo";
@@ -26,7 +28,6 @@ import ArgentinaFlag from '../assets/img/countries/argentina.svg';
 
 import "./Home.css";
 
-type connectionStatus = "connected" | "disconnected" | "connecting";
 
 const fakeRequest = (): Promise<IServerInfoDetails> =>
   Promise.resolve({
@@ -36,30 +37,32 @@ const fakeRequest = (): Promise<IServerInfoDetails> =>
   });
 
 const Home: React.FC = () => {
-  const [status, setStatus] = useState<connectionStatus>("disconnected");
+  const { status, connect, disconnect } = useOutline();
+
+  // const [status, setStatus] = useState<connectionStatus>("disconnected");
   const [{ name, ip, premium, ms }, setRegion] = useState<IServerInfoDetails>({
     name: "Argentina",
     ip: "24.12.001.124",
     premium: true,
   });
 
-  const handleConnect = () => {
-    setStatus("connecting");
+  // const handleConnect = () => {
+  //   setStatus("connecting");
 
-    setTimeout(async () => {
-      console.log("Connecting server...");
-      const response = await fakeRequest();
-      setRegion(response);
-      setStatus("connected");
-    }, 1000);
-  };
+  //   setTimeout(async () => {
+  //     console.log("Connecting server...");
+  //     const response = await fakeRequest();
+  //     setRegion(response);
+  //     setStatus("connected");
+  //   }, 1000);
+  // };
 
-  const handleDisconnect = () => {
-    console.log("Disconnecting server...");
-    setStatus("disconnected");
-  };
+  // const handleDisconnect = () => {
+  //   console.log("Disconnecting server...");
+  //   setStatus("disconnected");
+  // };
 
-  const connected = status === "connected";
+  // const connected = status === "connected";
 
   return (
     <IonPage>
@@ -82,14 +85,14 @@ const Home: React.FC = () => {
       </IonHeader>
 
       <IonContent className="home-container" scrollY={false}>
-        {status === "disconnected" && (
+        {status === OutlineStatus.disconnected  && (
           <div className="home-content">
             <IonText color="dark" className="subtitle">
               Tap the button bellow to connect
             </IonText>
 
             <div className="btn-connect-container">
-              <IonButton className="home-power-button" size="large" fill="clear" onClick={handleConnect}>
+              <IonButton className="home-power-button" size="large" fill="clear" onClick={connect}>
                 <IonIcon className="home-power-icon" slot="icon-only" icon={PowerIcon}/>
               </IonButton>
               <IonText className="text-button">Not Connected</IonText>
@@ -101,11 +104,11 @@ const Home: React.FC = () => {
           </div>
         )}
 
-        {(status === "connecting" || status === "connected") && (
+        {(status === OutlineStatus.connected || status === OutlineStatus.loading ) && (
           <div className="home-connecting-container">
             <div className="ion-text-center">
               <IonText color="dark" className="interval-title">
-                {connected ? "Connecting Time" : "Connecting"}
+                {status === OutlineStatus.connected ? "Connecting Time" : "Connecting"}
               </IonText>
               <IonText color="success" className="interval-time">
                 00:00:00
@@ -124,12 +127,12 @@ const Home: React.FC = () => {
                     className="home-power-button"
                     size="large"
                     fill="clear"
-                    onClick={connected ? handleDisconnect : handleConnect}
+                    onClick={status === OutlineStatus.connected ? disconnect : connect}
                 >
-                  <IonIcon className="home-power-icon" slot="icon-only" icon={connected ? ConnectedIcon : ConnectingIcon}/>
+                  <IonIcon className="home-power-icon" slot="icon-only" icon={status === OutlineStatus.connected ? ConnectedIcon : ConnectingIcon}/>
                 </IonButton>
                 <IonText className="text-button">
-                  {connected ? "Connected" : "Connecting"}
+                  {status === OutlineStatus.connected ? "Connected" : "Connecting"}
                 </IonText>
               </div>
             </div>
