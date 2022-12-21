@@ -9,9 +9,11 @@ import {
   setupIonicReact
 } from '@ionic/react';
 
-import { IonReactRouter } from '@ionic/react-router';
+/* Providers */
+import { OutlineProvider } from "./providers/OutlineProvider";
+import { AuthProvider } from "./providers/AuthProvider";
 
-import { AuthProvider } from "./AuthProvider";
+import { IonReactRouter } from '@ionic/react-router';
 
 import MainTabs from './pages/MainTabs';
 import Login from "./pages/Login";
@@ -43,16 +45,18 @@ setupIonicReact();
 
 const App: React.FC = () => (
   <AuthProvider>
-    <IonApp>
-      <IonReactRouter>
-        <IonRouterOutlet id="main">
-          <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
-          <PublicRoute component={SplashPage} path="/splash" exact={true} />
-          <Route path="/tabs" render={() => <MainTabs />} />
-          <Route exact path="/" render={() => <Redirect to="/tabs/home" />} />
-        </IonRouterOutlet>
-      </IonReactRouter>
-    </IonApp>
+    <OutlineProvider>
+      <IonApp>
+        <IonReactRouter>
+          <IonRouterOutlet id="main">
+            <PublicRoute restricted={true} component={Login} path="/login" exact={true} />
+            <PublicRoute component={SplashPage} path="/splash" exact={true} />
+            <Route path="/tabs" render={() => <MainTabs />} />
+            <Route exact path="/" render={() => <Redirect to="/tabs/home" />} />
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </IonApp>
+    </OutlineProvider>
   </AuthProvider>
 );
 

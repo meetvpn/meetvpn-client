@@ -12,7 +12,7 @@ import {
   IonToolbar,
   IonRouterLink,
 } from "@ionic/react";
-import { useAuth } from "../AuthProvider";
+import { useAuth } from "../providers/AuthProvider";
 import RedirectIcon from '../assets/icon/redirect.svg';
 import ArrowIcon from '../assets/icon/arrow-right.svg';
 
