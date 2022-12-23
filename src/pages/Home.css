@@ -1,6 +1,60 @@
-.home-power-icon {
-  width: 136px;
-  height: 136px;
+/* Disconnected */
+.btn-switch rect,
+.btn-switch circle {
+  transition: fill 0.3s;
+}
+
+.disconnected rect {
+  fill: #edf7ff;
+}
+
+.disconnected circle {
+  fill: #5db8fa;
+}
+
+/* Connecting */
+.connecting rect {
+  fill: #fffaec;
+}
+
+.connecting circle {
+  fill: #ffcd4e;
+}
+
+/* Connected */
+.connected rect {
+  fill: #fff1f4;
+}
+
+.connected circle {
+  fill: #fa5d79;
+}
+
+ion-button.transition-height,
+.transition-height {
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+}
+
+div.transition-height {
+  display: none;
+}
+
+.transition-height.open {
+  display: flex;
+  height: 160px;
+  opacity: 1;
+}
+
+ion-button.transition-height.open {
+  height: 61px;
+  pointer-events: auto;
+}
+
+ion-text.transition-height.open {
+  height: 73px;
 }
 
 ion-header.home-header {
@@ -76,13 +130,13 @@ ion-button.button-clear {
 }
 
 /* Connection interval container */
+
 .home-connecting-container {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
 }
-
 ion-text.interval-title {
   font-weight: 500;
   font-size: 20px;
