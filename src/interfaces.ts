@@ -18,3 +18,8 @@ export interface ServerListProps {
   servers: IServerInfoDetails[],
   premiumServers?: boolean
 }
+
+export interface IMessages {
+  headerTitle: string;
+  footerText: string;
+}

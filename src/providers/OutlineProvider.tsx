@@ -6,7 +6,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { Preferences } from '@capacitor/preferences';
+import { Preferences } from "@capacitor/preferences";
 import { StatusBar } from "@capacitor/status-bar";
 import { SHADOWSOCKS_URI } from "ShadowsocksConfig";
 
@@ -17,9 +17,7 @@ interface IGateway {
 }
 
 const gateway: IGateway = JSON.parse(
-  atob(
-    process.env.REACT_APP_GETAWAY_BASE64 || ""
-  )
+  atob(process.env.REACT_APP_GETAWAY_BASE64 || "")
 );
 
 export enum OutlineStatus {
@@ -27,6 +25,8 @@ export enum OutlineStatus {
   connected,
   disconnected,
   reconnecting,
+  connecting,
+  disconnecting,
 }
 
 interface IOutline {
@@ -106,7 +106,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const connect = async () => {
-    setStatus(OutlineStatus.loading);
+    setStatus(OutlineStatus.connecting);
     try {
       // Check storage keys
       const storageKeys = await getKeysFromStorage();
@@ -143,7 +143,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const disconnect = async () => {
-    setStatus(OutlineStatus.loading);
+    setStatus(OutlineStatus.disconnecting);
     // Emulate the disconnected status if is running in the browser
     if (!isEnabled) {
       return setStatus(OutlineStatus.disconnected);
@@ -159,7 +159,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const checkAndUpdateRunningStatus = async () => {
-    setStatus(OutlineStatus.loading);
+    setStatus(OutlineStatus.connecting);
     const result = await Tunnel.isRunning();
     console.log("Outline isRunning", result);
     setStatus(result ? OutlineStatus.connected : OutlineStatus.disconnected);
