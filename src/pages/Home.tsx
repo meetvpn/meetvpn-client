@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   IonContent,
@@ -14,7 +14,7 @@ import {
 
 import { OutlineStatus, useOutline } from "../providers/OutlineProvider";
 
-import { IServerInfoDetails } from "../interfaces";
+import { IServerInfoDetails, IMessages } from "../interfaces";
 import ServerInfoCard from "../components/ServerInfoCard";
 import ServerNetworkInfo from "../components/ServerNetworkInfo";
 
@@ -25,20 +25,6 @@ import ArgentinaFlag from "../assets/img/countries/argentina.svg";
 
 import "./Home.css";
 
-const getConnectionStatusText = (argument1: OutlineStatus): string => {
-  switch (argument1) {
-    case OutlineStatus.connected:
-      return "Connected";
-
-    case OutlineStatus.loading:
-    case OutlineStatus.reconnecting:
-      return "Connecting";
-
-    default:
-      return "Not Connected";
-  }
-};
-
 const Home: React.FC = () => {
   const { status, connect, disconnect } = useOutline();
 
@@ -48,9 +34,31 @@ const Home: React.FC = () => {
     premium: true,
   });
 
-  const isLoading = status === OutlineStatus.loading;
+  const { headerTitle, footerText } = useMemo((): IMessages => {
+    switch (status) {
+      case OutlineStatus.disconnecting:
+        return { headerTitle: "Disconnecting", footerText: "Disconnecting" };
+
+      case OutlineStatus.connected:
+        return { headerTitle: "Connecting Time", footerText: "Connected" };
+
+      case OutlineStatus.connecting:
+      case OutlineStatus.reconnecting:
+        return { headerTitle: "Connecting Time", footerText: "Connecting" };
+
+      default:
+        return {
+          headerTitle: "Tap the button bellow to connect",
+          footerText: "Not Connected",
+        };
+    }
+  }, [status]);
+
+  const isConnecting =
+    status === OutlineStatus.connecting ||
+    status === OutlineStatus.reconnecting;
   const isDisconnected = status === OutlineStatus.disconnected;
-  const isReconnecting = status === OutlineStatus.reconnecting;
+  const isDisconnecting = status === OutlineStatus.disconnecting;
   const isConnected = status === OutlineStatus.connected;
 
   return (
@@ -84,16 +92,12 @@ const Home: React.FC = () => {
               color="dark"
               className={`${isDisconnected ? "subtitle" : "interval-title"}`}
             >
-              {isDisconnected
-                ? "Tap the button bellow to connect"
-                : isLoading || isReconnecting
-                ? "Connecting"
-                : "Connecting Time"}
+              {headerTitle}
             </IonText>
             <IonText
               color="success"
               className={`interval-time transition-height ${
-                (isLoading || isReconnecting || isConnected) && "open"
+                (isConnecting || isConnected) && "open"
               }`}
             >
               00:00:00
@@ -102,7 +106,7 @@ const Home: React.FC = () => {
 
           <div
             className={`connection-info-content transition-height ${
-              (isLoading || isReconnecting || isConnected) && "open"
+              (isConnecting || isConnected) && "open"
             }`}
           >
             <ServerNetworkInfo transferType="Upload" amount="12.99" />
@@ -126,7 +130,7 @@ const Home: React.FC = () => {
               <svg
                 className={`
                   btn-switch 
-                  ${(isLoading || isReconnecting) && "connecting"} 
+                  ${(isConnecting || isDisconnecting) && "connecting"} 
                   ${isConnected && "connected"}`}
                 width="136"
                 height="136"
@@ -142,9 +146,7 @@ const Home: React.FC = () => {
                 />
               </svg>
             </IonButton>
-            <IonText className="text-button">
-              {getConnectionStatusText(status)}
-            </IonText>
+            <IonText className="text-button">{footerText}</IonText>
           </div>
 
           <IonButton
