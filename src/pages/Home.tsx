@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useRef } from "react";
 
 import {
   IonContent,
@@ -17,6 +17,7 @@ import { OutlineStatus, useOutline } from "../providers/OutlineProvider";
 import { IServerInfoDetails, IMessages } from "../interfaces";
 import ServerInfoCard from "../components/ServerInfoCard";
 import ServerNetworkInfo from "../components/ServerNetworkInfo";
+import { useConnectionCounter } from "../hooks/useConnectionCounter";
 
 import SettingsIcon from "../assets/icon/settings.svg";
 import Options from "../assets/icon/more.svg";
@@ -27,6 +28,7 @@ import "./Home.css";
 
 const Home: React.FC = () => {
   const { status, connect, disconnect } = useOutline();
+  const { hours, minutes, seconds } = useConnectionCounter();
 
   const [{ name, ip, premium, ms }] = useState<IServerInfoDetails>({
     name: "Argentina",
@@ -100,7 +102,11 @@ const Home: React.FC = () => {
                 (isConnecting || isConnected) && "open"
               }`}
             >
-              00:00:00
+              <span className="times">{hours}</span>
+              <span>:</span>
+              <span className="times">{minutes}</span>
+              <span>:</span>
+              <span className="times">{seconds}</span>
             </IonText>
           </div>
 
