@@ -3,9 +3,7 @@ ion-content.server-list-page {
   --padding-top: 20px;
 }
 
-ion-toolbar.server-list-header {
-  height: 44px;
-  --min-height: 44px;
-  display: flex;
-  align-items: center;
+.ion-inner {
+  --ionicon-stroke-width: 16px;
+  border: 1px solid white
 }

@@ -11,8 +11,8 @@ const ServerNetworkInfo: React.FC<IServerNetworkInfo> = ({transferType, amount})
     className="network-info-card-container">
     {transferType === "Upload" ? <IonIcon src={UploadIcon}></IonIcon> : <IonIcon src={DownloadIcon}></IonIcon>}
     <div className='text-info-card'>
-        <IonText color="dark" className="card-subtitle">Upload</IonText>
-        <IonText color="dark" className="card-title">
+        <IonText className="card-subtitle">Upload</IonText>
+        <IonText className="card-title">
             <span>{amount}</span>
             <span>Mb/s</span>
         </IonText>

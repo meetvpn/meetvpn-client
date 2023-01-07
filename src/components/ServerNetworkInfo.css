@@ -14,15 +14,12 @@
   font-weight: 300;
   font-size: 12px;
   line-height: 190%;
-  color: #333333;
-
 }
 
 .network-info-card-container .card-title span:nth-of-type(1) {
   font-weight: 700;
   font-size: 24px;
   line-height: 140%;
-  color: #333333;
 }
 
 .network-info-card-container .card-title span:nth-of-type(2) {

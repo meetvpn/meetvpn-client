@@ -1,11 +1,3 @@
-ion-header.header-container {
-  padding: 32px 24px 0;
-}
-
-.toolbar-header-container {
-  --ion-toolbar-background: #fff;
-}
-
 .server-info {
   width: 150px;
   margin: 0 auto;

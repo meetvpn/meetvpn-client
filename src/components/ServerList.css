@@ -1,6 +1,7 @@
 .server-list-container {
   margin-top: 32px;
   padding: 0;
+  background: transparent
 }
 
 .server-list-container > ion-text {
