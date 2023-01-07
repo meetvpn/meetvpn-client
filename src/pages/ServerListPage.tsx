@@ -43,7 +43,7 @@ const ServerListPage: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader className="home-header ion-no-border">
+      <IonHeader className="ion-no-border" translucent={true}>
         <IonToolbar className="server-list-header">
           <IonText color="dark" className="title">
             Discover server

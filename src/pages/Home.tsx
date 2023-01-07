@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, useRef } from "react";
+import React, { useMemo, useState } from "react";
 
 import {
   IonContent,
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
 
   return (
     <IonPage>
-      <IonHeader className="home-header ion-no-border">
+      <IonHeader className="home-header ion-no-border" translucent={true}>
         <IonToolbar className="header-container">
           <IonButtons slot="start">
             <IonButton
