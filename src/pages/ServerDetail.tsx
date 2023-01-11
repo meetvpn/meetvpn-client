@@ -26,21 +26,21 @@ import HealthIcon from '../assets/icon/health.svg'
 
 import "./ServerDetail.css";
 
-const serverDetail: IServerInfoDetails = {
-  name: "United State",
-  ip: "24.12.001.124",
-  premium: false,
-  ms: "44 MS",
-  photo: EEUUFlag,
-};
+// const serverDetail: IServerInfoDetails = {
+//   name: "United State",
+//   ip: "24.12.001.124",
+//   premium: false,
+//   ms: "44 MS",
+//   photo: EEUUFlag,
+// };
 
 const ServerDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const [server, setServer] = useState<IServerInfoDetails | null>(null);
 
-  useEffect(() => {
-    setTimeout(() => setServer(serverDetail), 200);
-  }, [id]);
+  // useEffect(() => {
+  //   setTimeout(() => setServer(serverDetail), 200);
+  // }, [id]);
 
   return (
     <IonPage>
@@ -66,12 +66,12 @@ const ServerDetail: React.FC = () => {
                 <img src={EEUUFlag} alt="Flag" />
               </IonThumbnail>
 
-              <IonText color="dark" className="server-name">
+              {/* <IonText color="dark" className="server-name">
                 {server?.name}
               </IonText>
               <IonText color="medium" className="server-ip">
                 {`IP: ${server?.ip}`}
-              </IonText>
+              </IonText> */}
             </div>
 
             <IonList className="details-container">

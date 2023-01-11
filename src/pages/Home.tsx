@@ -30,11 +30,11 @@ const Home: React.FC = () => {
   const { status, connect, disconnect } = useOutline();
   const { hours, minutes, seconds } = useConnectionCounter();
 
-  const [{ name, ip, premium, ms }] = useState<IServerInfoDetails>({
-    name: "Argentina",
-    ip: "24.12.001.124",
-    premium: true,
-  });
+  // const [{ name, ip, premium, ms }] = useState<IServerInfoDetails>({
+  //   name: "Argentina",
+  //   ip: "24.12.001.124",
+  //   premium: true,
+  // });
 
   const { headerTitle, footerText } = useMemo((): IMessages => {
     switch (status) {
@@ -117,13 +117,13 @@ const Home: React.FC = () => {
           >
             <ServerNetworkInfo transferType="Upload" amount="12.99" />
             <ServerNetworkInfo transferType="Download" amount="12.99" />
-            <ServerInfoCard
+            {/* <ServerInfoCard
               name={name}
               ip={ip}
               premium={premium}
               ms={ms}
               photo={ArgentinaFlag}
-            />
+            /> */}
           </div>
 
           <div className="btn-connect-container">

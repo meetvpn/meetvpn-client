@@ -11,22 +11,22 @@ import BackIcon from '../assets/icon/arrow-left.svg';
 
 import './Favorite.css';
 
-const serverList: IServerInfoDetails[] = [
-  {name: 'Albania', ip: '24.12.001.124', premium: false, ms: '44 MS', photo: AlbaniaFlag},
-  {name: 'Argentina', ip: '24.12.001.125', premium: false, ms: '44 MS', photo: ArgentinaImg},
-  {name: 'Belgium', ip: '24.12.001.126', premium: true, ms: '44 MS', photo: BelgiumFlag},
-  {name: 'Argentina', ip: '24.12.001.127', premium: true, ms: '44 MS', photo: ArgentinaImg},
-]
+// const serverList: IServerInfoDetails[] = [
+//   {name: 'Albania', ip: '24.12.001.124', premium: false, ms: '44 MS', photo: AlbaniaFlag},
+//   {name: 'Argentina', ip: '24.12.001.125', premium: false, ms: '44 MS', photo: ArgentinaImg},
+//   {name: 'Belgium', ip: '24.12.001.126', premium: true, ms: '44 MS', photo: BelgiumFlag},
+//   {name: 'Argentina', ip: '24.12.001.127', premium: true, ms: '44 MS', photo: ArgentinaImg},
+// ]
 
 const Favorite: React.FC = () => {
   const [servers, setServers] = useState<IServerInfoDetails[]>([])
 
-  useEffect(() => {
-    // Get all servers
-    setTimeout(() => {
-      setServers(serverList);
-    }, 500)
-  }, []);
+  // useEffect(() => {
+  //   // Get all servers
+  //   setTimeout(() => {
+  //     setServers(serverList);
+  //   }, 500)
+  // }, []);
 
   return (
     <IonPage>
@@ -39,7 +39,7 @@ const Favorite: React.FC = () => {
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="server-list-page">
-        <ServerList
+        {/* <ServerList
           title='Free Servers'
           servers={servers.filter(server => !server.premium)}
         />
@@ -48,7 +48,7 @@ const Favorite: React.FC = () => {
           title='Premium Servers'
           servers={servers.filter(server => server.premium)}
           premiumServers={true}
-        />
+        /> */}
       </IonContent>
     </IonPage>
   );

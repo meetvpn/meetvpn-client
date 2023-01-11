@@ -4,42 +4,85 @@ import {
   IonContent,
   IonHeader,
   IonPage,
-  IonButtons,
+  // IonButtons,
   IonText,
   IonToolbar,
-  IonButton,
-  IonIcon,
+  // IonButton,
+  // IonIcon,
+  // IonList,
+  // IonItem,
+  // IonAvatar,
+  // IonLabel,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonList,
 } from "@ionic/react";
 
-import UpgradeToProCard from "../components/UpgradeToProCard";
-import ServerList from "../components/ServerList";
-import { IServerInfoDetails } from "../interfaces";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import ArgentinaImg from "../assets/img/countries/argentina.svg";
-import BelgiumFlag from "../assets/img/countries/belgium.svg";
-import AlbaniaFlag from "../assets/img/countries/belgium.svg";
-import Candle from "../assets/icon/candle.svg";
+// import UpgradeToProCard from "../components/UpgradeToProCard";
+import ServerInfoCard from "../components/ServerInfoCard";
+// import ServerList from "../components/ServerList";
+// import { IServerInfoDetails } from "../interfaces";
+
+// import ArgentinaImg from "../assets/img/countries/argentina.svg";
+// import BelgiumFlag from "../assets/img/countries/belgium.svg";
+// import AlbaniaFlag from "../assets/img/countries/belgium.svg";
+// import Candle from "../assets/icon/candle.svg";
 
 import "./ServerListPage.css";
 
-const serverList: IServerInfoDetails[] = [
-  {name: 'Albania', ip: '24.12.001.124', premium: false, ms: '44 MS', photo: AlbaniaFlag},
-  {name: 'Argentina', ip: '24.12.001.125', premium: false, ms: '44 MS', photo: ArgentinaImg},
-  {name: 'Belgium', ip: '24.12.001.126', premium: true, ms: '44 MS', photo: BelgiumFlag},
-  {name: 'Argentina', ip: '24.12.001.127', premium: true, ms: '44 MS', photo: ArgentinaImg},
-  {name: 'Argentina', ip: '24.12.001.128', premium: true, ms: '44 MS', photo: ArgentinaImg},
-  {name: 'Argentina', ip: '24.12.001.129', premium: true, ms: '44 MS', photo: ArgentinaImg},
-]
+const ITEMS_PER_PAGE = 20;
+
+const getServers = async ({ pageParam = 0 }) => {
+  const res = await fetch("http://localhost:3000/api/rpc/getServers", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      params: {
+        orderBy: { id: "desc" },
+        skip: ITEMS_PER_PAGE * pageParam,
+        take: ITEMS_PER_PAGE,
+      },
+      meta: {},
+    }),
+  });
+  const json = await res.json();
+  return json;
+};
 
 const ServerListPage: React.FC = () => {
-  const [servers, setServers] = useState<IServerInfoDetails[]>([]);
-
-  useEffect(() => {
-    // Get all servers
-    setTimeout(() => {
-      setServers(serverList);
-    }, 500);
-  }, []);
+  const {
+    status,
+    data,
+    // error,
+    // isFetching,
+    isFetchingNextPage,
+    // isFetchingPreviousPage,
+    fetchNextPage,
+    // fetchPreviousPage,
+    hasNextPage,
+    // hasPreviousPage,
+  } = useInfiniteQuery(["servers"], getServers, {
+    getPreviousPageParam: ({
+      result: {
+        nextPage: { skip, take },
+      },
+    }) => {
+      console.log("firstPage", skip / take - 1);
+      return skip / take - 1;
+    },
+    getNextPageParam: ({
+      result: {
+        nextPage: { skip, take },
+      },
+    }) => {
+      console.log("nextPage", skip / take);
+      return skip / take;
+    },
+  });
 
   return (
     <IonPage>
@@ -49,26 +92,65 @@ const ServerListPage: React.FC = () => {
             Discover server
           </IonText>
 
-          <IonButtons slot="end">
+          {/* <IonButtons slot="end">
             <IonButton color="light" className="header-icon">
               <IonIcon slot="icon-only" src={Candle} color="dark" />
             </IonButton>
-          </IonButtons>
+          </IonButtons> */}
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen className="server-list-page">
-        <UpgradeToProCard />
+        {/* <IonText color="dark">Free Servers</IonText> */}
 
-        <ServerList
+        {status === "loading" ? (
+          <p>Loading...</p>
+        ) : status === "error" ? (
+          <div>Error:</div>
+        ) : (
+          <IonList className="server-list-container">
+            <div className="server-list">
+              {data.pages.map((page: any, index: number) => (
+                <>
+                  {page.result.servers.map((server: any) => (
+                    <ServerInfoCard key={server.hostname} {...server} />
+                  ))}
+                </>
+              ))}
+            </div>
+          </IonList>
+        )}
+
+        <IonInfiniteScroll
+          disabled={!hasNextPage || isFetchingNextPage}
+          onIonInfinite={(ev) => {
+            fetchNextPage();
+            setTimeout(() => ev.target.complete(), 500);
+          }}
+        >
+          <IonInfiniteScrollContent></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
+        {/* <UpgradeToProCard /> */}
+
+        {/* <IonList className="server-list-container">
+          <IonText color="dark">Free Servers ({servers.length})</IonText>
+
+          <div className="server-list">
+            {servers.map((server) => (
+              <ServerInfoCard key={server.ip} {...server} />
+            ))}
+          </div>
+        </IonList> */}
+
+        {/* <ServerList
           title="Free Servers"
-          servers={servers.filter((server) => !server.premium)}
-        />
+          servers={serverList.filter((server) => !server.premium)}
+        /> */}
 
-        <ServerList
+        {/* <ServerList
           title="Premium Servers"
           servers={servers.filter((server) => server.premium)}
           premiumServers={true}
-        />
+        /> */}
       </IonContent>
     </IonPage>
   );
