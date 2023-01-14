@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from // useState // useEffect,
+"react";
 
 import {
   IonContent,
@@ -21,8 +22,8 @@ import {
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 // import UpgradeToProCard from "../components/UpgradeToProCard";
-import ServerInfoCard from "../components/ServerInfoCard";
-// import ServerList from "../components/ServerList";
+// import ServerInfoCard from "../components/ServerInfoCard";
+import ServerList from "../components/ServerList";
 // import { IServerInfoDetails } from "../interfaces";
 
 // import ArgentinaImg from "../assets/img/countries/argentina.svg";
@@ -71,7 +72,7 @@ const ServerListPage: React.FC = () => {
         nextPage: { skip, take },
       },
     }) => {
-      console.log("firstPage", skip / take - 1);
+      // console.log("firstPage", skip / take - 1);
       return skip / take - 1;
     },
     getNextPageParam: ({
@@ -79,7 +80,7 @@ const ServerListPage: React.FC = () => {
         nextPage: { skip, take },
       },
     }) => {
-      console.log("nextPage", skip / take);
+      // console.log("nextPage", skip / take);
       return skip / take;
     },
   });
@@ -91,7 +92,6 @@ const ServerListPage: React.FC = () => {
           <IonText color="dark" className="title">
             Discover server
           </IonText>
-
           {/* <IonButtons slot="end">
             <IonButton color="light" className="header-icon">
               <IonIcon slot="icon-only" src={Candle} color="dark" />
@@ -111,9 +111,13 @@ const ServerListPage: React.FC = () => {
             <div className="server-list">
               {data.pages.map((page: any, index: number) => (
                 <>
-                  {page.result.servers.map((server: any) => (
-                    <ServerInfoCard key={server.hostname} {...server} />
-                  ))}
+                  <ServerList
+                    title="Free Servers"
+                    servers={page.result.servers}
+                  />
+                  {/* {page.result.servers.map((server: any, index: number) => (
+                    <ServerInfoCard key={index} {...server} />
+                  ))} */}
                 </>
               ))}
             </div>

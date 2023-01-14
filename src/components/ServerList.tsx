@@ -17,6 +17,7 @@ import {
 import { ServerListProps } from "../interfaces";
 
 import ServerInfoCard from "./ServerInfoCard";
+import ServerItem from "./ServerItem";
 
 import "./ServerList.css";
 
@@ -41,7 +42,7 @@ const ServerList: React.FC<ServerListProps> = ({
   return (
     <>
       <IonList className="server-list-container">
-        <IonText color="dark">
+        {/* <IonText color="dark">
           {title}
           {premiumServers ? (
             <IonButton fill="clear" color="warning">
@@ -52,11 +53,11 @@ const ServerList: React.FC<ServerListProps> = ({
               View all
             </IonButton>
           )}
-        </IonText>
+        </IonText> */}
 
         <div className="server-list">
           {servers.map((server, index) => (
-            <ServerInfoCard key={index} {...server} />
+            <ServerItem key={index} {...server} />
           ))}
         </div>
       </IonList>

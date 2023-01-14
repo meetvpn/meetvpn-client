@@ -15,26 +15,20 @@ import {
 import { OutlineStatus, useOutline } from "../providers/OutlineProvider";
 
 import { IServerInfoDetails, IMessages } from "../interfaces";
-import ServerInfoCard from "../components/ServerInfoCard";
+// import ServerInfoCard from "../components/ServerInfoCard";
 import ServerNetworkInfo from "../components/ServerNetworkInfo";
 import { useConnectionCounter } from "../hooks/useConnectionCounter";
 
 import SettingsIcon from "../assets/icon/settings.svg";
 import Options from "../assets/icon/more.svg";
 import MeetVPNIco from "../assets/icon/meet-vpn.svg";
-import ArgentinaFlag from "../assets/img/countries/argentina.svg";
+// import ArgentinaFlag from "../assets/img/countries/argentina.svg";
 
 import "./Home.css";
 
 const Home: React.FC = () => {
   const { status, connect, disconnect } = useOutline();
   const { hours, minutes, seconds } = useConnectionCounter();
-
-  // const [{ name, ip, premium, ms }] = useState<IServerInfoDetails>({
-  //   name: "Argentina",
-  //   ip: "24.12.001.124",
-  //   premium: true,
-  // });
 
   const { headerTitle, footerText } = useMemo((): IMessages => {
     switch (status) {
@@ -62,6 +56,8 @@ const Home: React.FC = () => {
   const isDisconnected = status === OutlineStatus.disconnected;
   const isDisconnecting = status === OutlineStatus.disconnecting;
   const isConnected = status === OutlineStatus.connected;
+
+  console.log("status", status);
 
   return (
     <IonPage>

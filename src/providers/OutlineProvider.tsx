@@ -31,6 +31,7 @@ export enum OutlineStatus {
 
 interface IOutline {
   connect: () => Promise<any>;
+  connectToKey: (key: string) => Promise<any>;
   disconnect: () => Promise<any>;
   status: OutlineStatus;
 }
@@ -196,6 +197,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
 
   const value = {
     connect,
+    connectToKey,
     disconnect,
     status,
   };

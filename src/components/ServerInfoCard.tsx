@@ -2,30 +2,33 @@ import React from "react";
 import { IonIcon, IonText, IonThumbnail, IonImg } from "@ionic/react";
 // import { IServerInfoDetails } from "../interfaces";
 
-import CrowIcon from "../assets/icon/crown.svg";
-import CrowBoldIcon from "../assets/icon/bold-crown.svg";
+// import CrowIcon from "../assets/icon/crown.svg";
+// import CrowBoldIcon from "../assets/icon/bold-crown.svg";
 import ChartBoldIcon from "../assets/icon/bold-chart.svg";
 
 import "./ServerInfoCard.css";
 
-const ServerInfoCard: React.FC = ({
-  id,
-  hostname,
-  quality,
-  location,
-}: any) => (
+const ServerInfoCard: React.FC = ({ id, hostname, quality, location }: any) => (
   <div key={id} className="info-card-container">
     <div className="info-container">
       <IonThumbnail>
-        <img alt={`${location?.country || "Missing"} Flag`} src={`http://localhost:3000/flags/4x3/${location?.countryCode.toLowerCase() || "missing"}.svg`} />
+        <img
+          alt={`${location?.country || "Missing"} Flag`}
+          src={`http://localhost:3000/flags/4x3/${
+            location?.countryCode?.toLowerCase() || "missing"
+          }.svg`}
+        />
       </IonThumbnail>
       <div className="text-info-card">
         <IonText color="dark" className="card-title">
           Server {id}
         </IonText>
         <IonText color="medium" className="card-subtitle">
-          {hostname}
+          {location.country}
         </IonText>
+        {/* <IonText color="medium" className="card-subtitle">
+          {hostname}
+        </IonText> */}
       </div>
     </div>
 
