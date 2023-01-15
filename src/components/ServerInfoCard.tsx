@@ -1,5 +1,10 @@
 import React from "react";
-import { IonIcon, IonText, IonThumbnail, IonImg } from "@ionic/react";
+import {
+  IonIcon,
+  IonText,
+  IonThumbnail,
+  // IonImg
+} from "@ionic/react";
 // import { IServerInfoDetails } from "../interfaces";
 
 // import CrowIcon from "../assets/icon/crown.svg";

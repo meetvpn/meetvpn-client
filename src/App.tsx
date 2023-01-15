@@ -10,10 +10,10 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { IonReactRouter } from "@ionic/react-router";
 
 import MainTabs from "./pages/MainTabs";
-import Login from "./pages/Login";
-import SplashPage from "./pages/SplashPage";
+// import Login from "./pages/Login";
+// import SplashPage from "./pages/SplashPage";
 
-import PublicRoute from "./components/PublicRoute";
+// import PublicRoute from "./components/PublicRoute";
 
 /* Core CSS required for Ionic components to work properly */
 import "@ionic/react/css/core.css";
