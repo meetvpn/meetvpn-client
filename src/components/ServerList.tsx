@@ -9,10 +9,10 @@ import {
   IonContent,
   IonToolbar,
   IonTitle,
-  IonItem,
-  IonLabel,
-  IonAvatar,
-  IonImg,
+  // IonItem,
+  // IonLabel,
+  // IonAvatar,
+  // IonImg,
 } from "@ionic/react";
 import { ServerListProps } from "../interfaces";
 

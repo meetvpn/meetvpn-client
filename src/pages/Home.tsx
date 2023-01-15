@@ -1,26 +1,32 @@
-import React, { useMemo, useState } from "react";
+import React, { 
+  useMemo,
+  // useState
+} from "react";
 
 import {
   IonContent,
   IonHeader,
   IonPage,
   IonToolbar,
-  IonIcon,
+  // IonIcon,
   IonButton,
   IonText,
-  IonButtons,
+  // IonButtons,
   IonImg,
 } from "@ionic/react";
 
 import { OutlineStatus, useOutline } from "../providers/OutlineProvider";
 
-import { IServerInfoDetails, IMessages } from "../interfaces";
+import {
+  // IServerInfoDetails,
+  IMessages
+} from "../interfaces";
 // import ServerInfoCard from "../components/ServerInfoCard";
 import ServerNetworkInfo from "../components/ServerNetworkInfo";
 import { useConnectionCounter } from "../hooks/useConnectionCounter";
 
-import SettingsIcon from "../assets/icon/settings.svg";
-import Options from "../assets/icon/more.svg";
+// import SettingsIcon from "../assets/icon/settings.svg";
+// import Options from "../assets/icon/more.svg";
 import MeetVPNIco from "../assets/icon/meet-vpn.svg";
 // import ArgentinaFlag from "../assets/img/countries/argentina.svg";
 
@@ -63,7 +69,7 @@ const Home: React.FC = () => {
     <IonPage>
       <IonHeader className="home-header ion-no-border" translucent={true}>
         <IonToolbar className="header-container">
-          <IonButtons slot="start">
+          {/* <IonButtons slot="start">
             <IonButton
               routerLink="/tabs/settings"
               color="light"
@@ -71,15 +77,15 @@ const Home: React.FC = () => {
             >
               <IonIcon slot="icon-only" src={SettingsIcon} color="dark" />
             </IonButton>
-          </IonButtons>
+          </IonButtons> */}
 
           <IonImg src={MeetVPNIco} />
 
-          <IonButtons slot="end">
+          {/* <IonButtons slot="end">
             <IonButton color="light" className="header-icon">
               <IonIcon slot="icon-only" src={Options} color="dark" />
             </IonButton>
-          </IonButtons>
+          </IonButtons> */}
         </IonToolbar>
       </IonHeader>
 

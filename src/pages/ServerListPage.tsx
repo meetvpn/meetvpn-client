@@ -36,7 +36,7 @@ import "./ServerListPage.css";
 const ITEMS_PER_PAGE = 20;
 
 const getServers = async ({ pageParam = 0 }) => {
-  const res = await fetch("http://localhost:3000/api/rpc/getServers", {
+  const res = await fetch(`${process.env.REACT_APP_GETAWAY_BASE64}/api/rpc/getServers`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -58,7 +58,7 @@ const ServerListPage: React.FC = () => {
   const {
     status,
     data,
-    // error,
+    error,
     // isFetching,
     isFetchingNextPage,
     // isFetchingPreviousPage,
@@ -105,7 +105,7 @@ const ServerListPage: React.FC = () => {
         {status === "loading" ? (
           <p>Loading...</p>
         ) : status === "error" ? (
-          <div>Error:</div>
+          <div>Error: {JSON.stringify(error)}</div>
         ) : (
           <IonList className="server-list-container">
             <div className="server-list">

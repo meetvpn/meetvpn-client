@@ -47,13 +47,13 @@ const App: React.FC = () => (
         <IonApp>
           <IonReactRouter>
             <IonRouterOutlet id="main">
-              <PublicRoute
+              {/* <PublicRoute
                 restricted={true}
                 component={Login}
                 path="/login"
                 exact={true}
-              />
-              <PublicRoute component={SplashPage} path="/splash" exact={true} />
+              /> */}
+              {/* <PublicRoute component={SplashPage} path="/splash" exact={true} /> */}
               <Route path="/tabs" render={() => <MainTabs />} />
               <Route
                 exact

@@ -14,7 +14,7 @@ const ServerInfoCard: React.FC = ({ id, hostname, quality, location }: any) => (
       <IonThumbnail>
         <img
           alt={`${location?.country || "Missing"} Flag`}
-          src={`http://localhost:3000/flags/4x3/${
+          src={`${process.env.REACT_APP_GETAWAY_BASE64}/flags/4x3/${
             location?.countryCode?.toLowerCase() || "missing"
           }.svg`}
         />

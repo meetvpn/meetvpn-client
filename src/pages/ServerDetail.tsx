@@ -48,7 +48,7 @@ interface ServerDetailPageProps
   }> {}
 
 const getServer = async (serverId: number) => {
-  const res = await fetch("http://localhost:3000/api/rpc/getServer", {
+  const res = await fetch(`${process.env.REACT_APP_GETAWAY_BASE64}/api/rpc/getServer`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -121,7 +121,7 @@ export const Server = ({ id }: any) => {
                       alt={`${
                         data?.result?.location?.country || "Missing"
                       } Flag`}
-                      src={`http://localhost:3000/flags/4x3/${
+                      src={`${process.env.REACT_APP_GETAWAY_BASE64}/flags/4x3/${
                         data?.result.location?.countryCode?.toLowerCase() ||
                         "missing"
                       }.svg`}
