@@ -60,14 +60,19 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const connectToKey = async (key: string) => {
+    setStatus(OutlineStatus.connecting);
     // Emulate the connected status if is running in the browser
     if (!isEnabled) {
+      setStatus(OutlineStatus.connected);
       return "OK";
     }
     try {
       const config = getConfig(key);
       const result = await Tunnel.start(config);
       console.log("Outline Start", result);
+      if (result === "OK") {
+        setStatus(OutlineStatus.connected);
+      }
       return result;
     } catch {
       return "FAIL";

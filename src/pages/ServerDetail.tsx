@@ -1,8 +1,10 @@
 import {
   // useEffect,
   // useState,
-  Suspense
+  Suspense,
 } from "react";
+
+import { useHistory } from "react-router-dom";
 
 import {
   IonContent,
@@ -52,24 +54,28 @@ interface ServerDetailPageProps
   }> {}
 
 const getServer = async (serverId: number) => {
-  const res = await fetch(`${process.env.REACT_APP_GETAWAY_BASE64}/api/rpc/getServer`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      params: {
-        id: serverId,
+  const res = await fetch(
+    `${process.env.REACT_APP_API_URL}/api/rpc/getServer`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-      meta: {},
-    }),
-  });
+      body: JSON.stringify({
+        params: {
+          id: serverId,
+        },
+        meta: {},
+      }),
+    }
+  );
   const json = await res.json();
   return json;
 };
 
 export const Server = ({ id }: any) => {
   const { status, connectToKey } = useOutline();
+  const history = useHistory();
 
   const serverId = parseInt(id);
 
@@ -125,7 +131,7 @@ export const Server = ({ id }: any) => {
                       alt={`${
                         data?.result?.location?.country || "Missing"
                       } Flag`}
-                      src={`${process.env.REACT_APP_GETAWAY_BASE64}/flags/4x3/${
+                      src={`${process.env.REACT_APP_API_URL}/flags/4x3/${
                         data?.result.location?.countryCode?.toLowerCase() ||
                         "missing"
                       }.svg`}
@@ -171,12 +177,17 @@ export const Server = ({ id }: any) => {
                 </IonList>
               </div>
 
-              <IonButton color="primary" onClick={async () => {
-                // console.log("data?.result?.accessKey?.access_url", data?.result?.accessKey[0]?.access_url);
-                await connectToKey(data?.result?.accessKey[0]?.access_url);
-                // console.log("st", st);
-                
-              }}>Connect Server</IonButton>
+              <IonButton
+                color="primary"
+                onClick={async () => {
+                  // console.log("data?.result?.accessKey?.access_url", data?.result?.accessKey[0]?.access_url);
+                  await connectToKey(data?.result?.accessKey[0]?.access_url);
+
+                  history.push("/tabs/home", { direction: "none" });
+                }}
+              >
+                Connect Server
+              </IonButton>
             </div>
           </IonContent>
         </>

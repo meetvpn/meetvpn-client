@@ -36,7 +36,7 @@ import "./ServerListPage.css";
 const ITEMS_PER_PAGE = 20;
 
 const getServers = async ({ pageParam = 0 }) => {
-  const res = await fetch(`${process.env.REACT_APP_GETAWAY_BASE64}/api/rpc/getServers`, {
+  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rpc/getServers`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

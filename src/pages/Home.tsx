@@ -22,7 +22,7 @@ import {
   IMessages
 } from "../interfaces";
 // import ServerInfoCard from "../components/ServerInfoCard";
-import ServerNetworkInfo from "../components/ServerNetworkInfo";
+// import ServerNetworkInfo from "../components/ServerNetworkInfo";
 import { useConnectionCounter } from "../hooks/useConnectionCounter";
 
 // import SettingsIcon from "../assets/icon/settings.svg";
@@ -117,8 +117,8 @@ const Home: React.FC = () => {
               (isConnecting || isConnected) && "open"
             }`}
           >
-            <ServerNetworkInfo transferType="Upload" amount="12.99" />
-            <ServerNetworkInfo transferType="Download" amount="12.99" />
+            {/* <ServerNetworkInfo transferType="Upload" amount="12.99" /> */}
+            {/* <ServerNetworkInfo transferType="Download" amount="12.99" /> */}
             {/* <ServerInfoCard
               name={name}
               ip={ip}
