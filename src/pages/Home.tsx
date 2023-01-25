@@ -1,40 +1,40 @@
-import React, { useMemo, useState } from "react";
+import React, { 
+  useMemo,
+  // useState
+} from "react";
 
 import {
   IonContent,
   IonHeader,
   IonPage,
   IonToolbar,
-  IonIcon,
+  // IonIcon,
   IonButton,
   IonText,
-  IonButtons,
+  // IonButtons,
   IonImg,
 } from "@ionic/react";
 
 import { OutlineStatus, useOutline } from "../providers/OutlineProvider";
 
-import { IServerInfoDetails, IMessages } from "../interfaces";
-import ServerInfoCard from "../components/ServerInfoCard";
-import ServerNetworkInfo from "../components/ServerNetworkInfo";
+import {
+  // IServerInfoDetails,
+  IMessages
+} from "../interfaces";
+// import ServerInfoCard from "../components/ServerInfoCard";
+// import ServerNetworkInfo from "../components/ServerNetworkInfo";
 import { useConnectionCounter } from "../hooks/useConnectionCounter";
 
-import SettingsIcon from "../assets/icon/settings.svg";
-import Options from "../assets/icon/more.svg";
+// import SettingsIcon from "../assets/icon/settings.svg";
+// import Options from "../assets/icon/more.svg";
 import MeetVPNIco from "../assets/icon/meet-vpn.svg";
-import ArgentinaFlag from "../assets/img/countries/argentina.svg";
+// import ArgentinaFlag from "../assets/img/countries/argentina.svg";
 
 import "./Home.css";
 
 const Home: React.FC = () => {
   const { status, connect, disconnect } = useOutline();
   const { hours, minutes, seconds } = useConnectionCounter();
-
-  const [{ name, ip, premium, ms }] = useState<IServerInfoDetails>({
-    name: "Argentina",
-    ip: "24.12.001.124",
-    premium: true,
-  });
 
   const { headerTitle, footerText } = useMemo((): IMessages => {
     switch (status) {
@@ -63,11 +63,13 @@ const Home: React.FC = () => {
   const isDisconnecting = status === OutlineStatus.disconnecting;
   const isConnected = status === OutlineStatus.connected;
 
+  console.log("status", status);
+
   return (
     <IonPage>
       <IonHeader className="home-header ion-no-border" translucent={true}>
         <IonToolbar className="header-container">
-          <IonButtons slot="start">
+          {/* <IonButtons slot="start">
             <IonButton
               routerLink="/tabs/settings"
               color="light"
@@ -75,15 +77,15 @@ const Home: React.FC = () => {
             >
               <IonIcon slot="icon-only" src={SettingsIcon} color="dark" />
             </IonButton>
-          </IonButtons>
+          </IonButtons> */}
 
           <IonImg src={MeetVPNIco} />
 
-          <IonButtons slot="end">
+          {/* <IonButtons slot="end">
             <IonButton color="light" className="header-icon">
               <IonIcon slot="icon-only" src={Options} color="dark" />
             </IonButton>
-          </IonButtons>
+          </IonButtons> */}
         </IonToolbar>
       </IonHeader>
 
@@ -115,15 +117,15 @@ const Home: React.FC = () => {
               (isConnecting || isConnected) && "open"
             }`}
           >
-            <ServerNetworkInfo transferType="Upload" amount="12.99" />
-            <ServerNetworkInfo transferType="Download" amount="12.99" />
-            <ServerInfoCard
+            {/* <ServerNetworkInfo transferType="Upload" amount="12.99" /> */}
+            {/* <ServerNetworkInfo transferType="Download" amount="12.99" /> */}
+            {/* <ServerInfoCard
               name={name}
               ip={ip}
               premium={premium}
               ms={ms}
               photo={ArgentinaFlag}
-            />
+            /> */}
           </div>
 
           <div className="btn-connect-container">

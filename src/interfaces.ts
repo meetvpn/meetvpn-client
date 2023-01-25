@@ -1,9 +1,13 @@
 export interface IServerInfoDetails {
-  name: string
-  ip: string
-  photo?: string
-  premium: boolean
-  ms?: string
+  id: number
+  hostname: string
+  quality: number
+  location: ILocation
+}
+
+export interface ILocation {
+  country: string
+  countryCode: number
 }
 
 type transferType = "Upload" | "Download";
@@ -15,7 +19,7 @@ export interface IServerNetworkInfo {
 
 export interface ServerListProps {
   title: string;
-  servers: IServerInfoDetails[],
+  servers: any[],
   premiumServers?: boolean
 }
 

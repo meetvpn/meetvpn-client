@@ -2,8 +2,8 @@ import React from "react";
 
 import { IonItem, IonText, IonIcon } from "@ionic/react";
 
-import UploadIcon from "../assets/icon/upload.svg";
-import DownloadIcon from "../assets/icon/download.svg";
+// import UploadIcon from "../assets/icon/upload.svg";
+// import DownloadIcon from "../assets/icon/download.svg";
 
 import "./ItemServerInfoParam.css";
 
