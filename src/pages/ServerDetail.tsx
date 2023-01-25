@@ -27,6 +27,8 @@ import { useQuery } from "@tanstack/react-query";
 
 import { useOutline } from "../providers/OutlineProvider";
 
+import getServer from "../queries/getServer";
+
 import ItemServerInfoParam from "../components/ItemServerInfoParam";
 // import { IServerInfoDetails } from "../interfaces";
 
@@ -52,26 +54,6 @@ interface ServerDetailPageProps
   extends RouteComponentProps<{
     id: string;
   }> {}
-
-const getServer = async (serverId: number) => {
-  const res = await fetch(
-    `${process.env.REACT_APP_API_URL}/api/rpc/getServer`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        params: {
-          id: serverId,
-        },
-        meta: {},
-      }),
-    }
-  );
-  const json = await res.json();
-  return json;
-};
 
 export const Server = ({ id }: any) => {
   const { status, connectToKey } = useOutline();
@@ -181,7 +163,7 @@ export const Server = ({ id }: any) => {
                 color="primary"
                 onClick={async () => {
                   // console.log("data?.result?.accessKey?.access_url", data?.result?.accessKey[0]?.access_url);
-                  await connectToKey(data?.result?.accessKey[0]?.access_url);
+                  await connectToKey(data?.result?.accessKey[0]);
 
                   history.push("/tabs/home", { direction: "none" });
                 }}

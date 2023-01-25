@@ -21,6 +21,8 @@ import {
 
 import { useInfiniteQuery } from "@tanstack/react-query";
 
+import getServers from "../queries/getServers";
+
 // import UpgradeToProCard from "../components/UpgradeToProCard";
 // import ServerInfoCard from "../components/ServerInfoCard";
 import ServerList from "../components/ServerList";
@@ -32,27 +34,6 @@ import ServerList from "../components/ServerList";
 // import Candle from "../assets/icon/candle.svg";
 
 import "./ServerListPage.css";
-
-const ITEMS_PER_PAGE = 20;
-
-const getServers = async ({ pageParam = 0 }) => {
-  const res = await fetch(`${process.env.REACT_APP_API_URL}/api/rpc/getServers`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      params: {
-        orderBy: { id: "desc" },
-        skip: ITEMS_PER_PAGE * pageParam,
-        take: ITEMS_PER_PAGE,
-      },
-      meta: {},
-    }),
-  });
-  const json = await res.json();
-  return json;
-};
 
 const ServerListPage: React.FC = () => {
   const {

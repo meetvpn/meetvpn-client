@@ -7,7 +7,7 @@ import {
   useState,
 } from "react";
 import { Preferences } from "@capacitor/preferences";
-import { StatusBar } from "@capacitor/status-bar";
+// import { StatusBar } from "@capacitor/status-bar";
 import { SHADOWSOCKS_URI } from "ShadowsocksConfig";
 
 interface IGateway {
@@ -31,7 +31,7 @@ export enum OutlineStatus {
 
 interface IOutline {
   connect: () => Promise<any>;
-  connectToKey: (key: string) => Promise<any>;
+  connectToKey: (accessKeys: any) => Promise<any>;
   disconnect: () => Promise<any>;
   status: OutlineStatus;
 }
@@ -59,23 +59,73 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
     };
   };
 
-  const connectToKey = async (key: string) => {
+  const connectToKey = async (key: any) => {
+    console.log("connectToKey", key);
+    
     setStatus(OutlineStatus.connecting);
     // Emulate the connected status if is running in the browser
     if (!isEnabled) {
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({key: key, time: Date.now()}),
+      });
       setStatus(OutlineStatus.connected);
       return "OK";
     }
     try {
-      const config = getConfig(key);
+      const config = getConfig(key.access_url);
+      console.log("Outline Config", config);
+      
       const result = await Tunnel.start(config);
       console.log("Outline Start", result);
       if (result === "OK") {
+        await Preferences.set({
+          key: "currentKey",
+          value: JSON.stringify({ key: key, time: Date.now() }),
+        });
         setStatus(OutlineStatus.connected);
       }
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({ key: null }),
+      });
+      setStatus(OutlineStatus.disconnected);
       return result;
-    } catch {
+    } catch (e) {
+      console.log("Outline Start Error", e);
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({ key: null }),
+      });
+      setStatus(OutlineStatus.disconnected);
       return "FAIL";
+    }
+  };
+
+  const getKeysFromApi = async () => {
+    try {
+      const res = await fetch(
+        `${process.env.REACT_APP_API_URL}/api/rpc/getAccessKeys`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            params: {
+              orderBy: { id: "desc" },
+              skip: 10,
+              take: 10,
+            },
+            meta: {},
+          }),
+        }
+      );
+      const json = await res.json();
+      // return json.result.map((keys: any) => keys.access_url);
+      return json;
+    } catch {
+      return;
     }
   };
 
@@ -112,38 +162,61 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const connect = async () => {
-    setStatus(OutlineStatus.connecting);
     try {
       // Check storage keys
-      const storageKeys = await getKeysFromStorage();
-      if (storageKeys) {
-        for (let key of storageKeys) {
+      // const storageKeys = await getKeysFromStorage();
+      // if (storageKeys) {
+      //   for (let key of storageKeys) {
+      //     const result = await connectToKey(key);
+      //     if (result === "OK") {
+      //       setStatus(OutlineStatus.connected);
+      //       return;
+      //     }
+      //   }
+      // }
+      // Check API keys
+      const {
+        result: { accessKeys },
+      } = await getKeysFromApi();
+      if (accessKeys?.length) {
+        await Preferences.set({
+          key: "keys",
+          value: JSON.stringify({ keys: accessKeys }),
+        });
+        for (let key of accessKeys) {
           const result = await connectToKey(key);
           if (result === "OK") {
-            setStatus(OutlineStatus.connected);
             return;
           }
         }
       }
       // Check gateway keys
-      const gatewayKeys = await getKeysFromGateway();
-      if (gatewayKeys) {
-        await Preferences.set({
-          key: "keys",
-          value: JSON.stringify({ keys: gatewayKeys }),
-        });
-        for (let key of gatewayKeys) {
-          const result = await connectToKey(key);
-          if (result === "OK") {
-            setStatus(OutlineStatus.connected);
-            return;
-          }
-        }
-      }
+      // const gatewayKeys = await getKeysFromGateway();
+      // if (gatewayKeys) {
+      //   await Preferences.set({
+      //     key: "keys",
+      //     value: JSON.stringify({ keys: gatewayKeys }),
+      //   });
+      //   for (let key of gatewayKeys) {
+      //     const result = await connectToKey(key);
+      //     if (result === "OK") {
+      //       setStatus(OutlineStatus.connected);
+      //       return;
+      //     }
+      //   }
+      // }
       // Fallback
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({ key: null, time: null }),
+      });
       setStatus(OutlineStatus.disconnected);
     } catch (e) {
       console.log(e);
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({ key: null, time: null }),
+      });
       setStatus(OutlineStatus.disconnected);
     }
   };
@@ -152,10 +225,21 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
     setStatus(OutlineStatus.disconnecting);
     // Emulate the disconnected status if is running in the browser
     if (!isEnabled) {
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({ key: null, time: null }),
+      });
       return setStatus(OutlineStatus.disconnected);
     }
     const result = await Tunnel.stop();
     console.log("Outline Stop", result);
+
+    // Remove the current key from storage
+    await Preferences.set({
+      key: "currentKey",
+      value: JSON.stringify({ key: null, time: null }),
+    });
+
     // Adding delay after disconnect to improve the UX
     setTimeout(() => {
       setStatus(
@@ -168,16 +252,22 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
     setStatus(OutlineStatus.connecting);
     const result = await Tunnel.isRunning();
     console.log("Outline isRunning", result);
+    if(!result) {
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({ key: null, time: null }),
+      });
+    }
     setStatus(result ? OutlineStatus.connected : OutlineStatus.disconnected);
   };
 
-  useEffect(() => {
-    if (isEnabled) {
-      StatusBar.setBackgroundColor({
-        color: status === OutlineStatus.connected ? "#3880ff" : "#999999",
-      });
-    }
-  }, [isEnabled, status]);
+  // useEffect(() => {
+  //   if (isEnabled) {
+  //     StatusBar.setBackgroundColor({
+  //       color: status === OutlineStatus.connected ? "#3880ff" : "#999999",
+  //     });
+  //   }
+  // }, [isEnabled, status]);
 
   useEffect(() => {
     if (isEnabled) {
