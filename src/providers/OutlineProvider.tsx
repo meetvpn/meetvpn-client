@@ -29,11 +29,17 @@ export enum OutlineStatus {
   disconnecting,
 }
 
+export interface CurrentKey {
+  key: any;
+  time: number | null;
+}
+
 interface IOutline {
   connect: () => Promise<any>;
   connectToKey: (accessKeys: any) => Promise<any>;
   disconnect: () => Promise<any>;
   status: OutlineStatus;
+  currentKey: CurrentKey;
 }
 const OutlineContext = createContext<IOutline>({} as IOutline);
 
@@ -42,6 +48,10 @@ export const useOutline = () => useContext(OutlineContext);
 export const OutlineProvider = ({ children }: { children: ReactNode }) => {
   const isEnabled = isPlatform("hybrid");
   const [status, setStatus] = useState(OutlineStatus.disconnected);
+  const [currentKey, setCurrentKey] = useState({
+    key: null,
+    time: null,
+  } as CurrentKey);
 
   const Tunnel = isEnabled
     ? // @ts-ignore
@@ -61,42 +71,57 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
 
   const connectToKey = async (key: any) => {
     console.log("connectToKey", key);
-    
+
     setStatus(OutlineStatus.connecting);
     // Emulate the connected status if is running in the browser
     if (!isEnabled) {
+      const keyTime = {
+        key: key,
+        time: Date.now(),
+      };
+
       await Preferences.set({
         key: "currentKey",
-        value: JSON.stringify({key: key, time: Date.now()}),
+        value: JSON.stringify(keyTime),
       });
+      setCurrentKey(keyTime);
       setStatus(OutlineStatus.connected);
       return "OK";
     }
     try {
       const config = getConfig(key.access_url);
       console.log("Outline Config", config);
-      
+
       const result = await Tunnel.start(config);
       console.log("Outline Start", result);
       if (result === "OK") {
+        const keyTime = {
+          key: key,
+          time: Date.now(),
+        };
+
         await Preferences.set({
           key: "currentKey",
-          value: JSON.stringify({ key: key, time: Date.now() }),
+          value: JSON.stringify(keyTime),
         });
+        setCurrentKey(keyTime);
         setStatus(OutlineStatus.connected);
+        return "OK";
       }
       await Preferences.set({
         key: "currentKey",
-        value: JSON.stringify({ key: null }),
+        value: JSON.stringify({ key: null, time: null }),
       });
+      setCurrentKey({ key: null, time: null });
       setStatus(OutlineStatus.disconnected);
-      return result;
+      return "FAIL";
     } catch (e) {
       console.log("Outline Start Error", e);
       await Preferences.set({
         key: "currentKey",
         value: JSON.stringify({ key: null }),
       });
+      setCurrentKey({ key: null, time: null });
       setStatus(OutlineStatus.disconnected);
       return "FAIL";
     }
@@ -190,6 +215,9 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
           }
         }
       }
+
+      console.log("No keys found");
+
       // Check gateway keys
       // const gatewayKeys = await getKeysFromGateway();
       // if (gatewayKeys) {
@@ -210,6 +238,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
         key: "currentKey",
         value: JSON.stringify({ key: null, time: null }),
       });
+      setCurrentKey({ key: null, time: null });
       setStatus(OutlineStatus.disconnected);
     } catch (e) {
       console.log(e);
@@ -217,6 +246,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
         key: "currentKey",
         value: JSON.stringify({ key: null, time: null }),
       });
+      setCurrentKey({ key: null, time: null });
       setStatus(OutlineStatus.disconnected);
     }
   };
@@ -229,6 +259,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
         key: "currentKey",
         value: JSON.stringify({ key: null, time: null }),
       });
+      setCurrentKey({ key: null, time: null });
       return setStatus(OutlineStatus.disconnected);
     }
     const result = await Tunnel.stop();
@@ -239,6 +270,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
       key: "currentKey",
       value: JSON.stringify({ key: null, time: null }),
     });
+    setCurrentKey({ key: null, time: null });
 
     // Adding delay after disconnect to improve the UX
     setTimeout(() => {
@@ -252,13 +284,42 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
     setStatus(OutlineStatus.connecting);
     const result = await Tunnel.isRunning();
     console.log("Outline isRunning", result);
-    if(!result) {
+
+    // Emulate the connected status if is running in the browser
+    if (!isEnabled) {
       await Preferences.set({
         key: "currentKey",
         value: JSON.stringify({ key: null, time: null }),
       });
+      setCurrentKey({ key: null, time: null });
+      return setStatus(OutlineStatus.connected);
     }
-    setStatus(result ? OutlineStatus.connected : OutlineStatus.disconnected);
+
+    if (!result) {
+      await Preferences.set({
+        key: "currentKey",
+        value: JSON.stringify({ key: null, time: null }),
+      });
+      setCurrentKey({ key: null, time: null });
+      setStatus(OutlineStatus.disconnected);
+    } else {
+      // get the current key from storage
+      const { value: currentKeyString } = await Preferences.get({
+        key: "currentKey",
+      });
+      if (currentKeyString) {
+        const currentKey = JSON.parse(currentKeyString);
+        setCurrentKey(currentKey);
+      } else {
+        await Preferences.set({
+          key: "currentKey",
+          value: JSON.stringify({ key: null, time: null }),
+        });
+        setCurrentKey({ key: null, time: null });
+      }
+
+      setStatus(OutlineStatus.connected);
+    }
   };
 
   // useEffect(() => {
@@ -274,17 +335,17 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
       checkAndUpdateRunningStatus();
       Tunnel.onStatusChange((nativeStatus: number) => {
         console.log("Outline Status", nativeStatus);
-        //   switch (nativeStatus) {
-        //     case 0:
-        //       setStatus(OutlineStatus.connected);
-        //       break;
-        //     case 1:
-        //       setStatus(OutlineStatus.disconnected);
-        //       break;
-        //     case 2:
-        //       setStatus(OutlineStatus.reconnecting);
-        //       break;
-        //   }
+        switch (nativeStatus) {
+          case 0:
+            setStatus(OutlineStatus.connected);
+            break;
+          case 1:
+            setStatus(OutlineStatus.disconnected);
+            break;
+          case 2:
+            setStatus(OutlineStatus.reconnecting);
+            break;
+        }
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -295,6 +356,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
     connectToKey,
     disconnect,
     status,
+    currentKey,
   };
   return (
     <OutlineContext.Provider value={value}>{children}</OutlineContext.Provider>
