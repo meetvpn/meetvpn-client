@@ -5,11 +5,10 @@ ion-content.server-list-page {
 
 .ion-inner {
   --ionicon-stroke-width: 16px;
-  border: 1px solid white
+  border: 1px solid white;
 }
 
 .server-list-container {
-  margin-top: 32px;
   padding: 0;
   background: transparent;
   gap: 14px;

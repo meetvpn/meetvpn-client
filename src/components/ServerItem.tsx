@@ -7,7 +7,12 @@ import "./ServerList.css";
 
 const ServerItem: React.FC = ({ id, hostname, quality, location }: any) => {
   return (
-    <IonItem routerLink={`/tabs/servers/${id}`}>
+    <IonItem
+      routerLink={`/tabs/servers/${id}`}
+      lines="none"
+      className="info-card-container"
+      color="light"
+    >
       <IonThumbnail slot="start">
         <img
           alt={`${location?.country || "Missing"} Flag`}
