@@ -61,7 +61,7 @@ const ServerList: React.FC<ServerListProps> = ({
           ))}
         </div>
       </IonList>
-      <IonModal
+      {/* <IonModal
         ref={modal}
         trigger="open-modal"
         presentingElement={presentingElement!}
@@ -96,7 +96,7 @@ const ServerList: React.FC<ServerListProps> = ({
             </div>
           </IonList>
         </IonContent>
-      </IonModal>
+      </IonModal> */}
     </>
   );
 };

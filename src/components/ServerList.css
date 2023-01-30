@@ -1,7 +1,10 @@
 .server-list-container {
-  margin-top: 32px;
   padding: 0;
-  background: transparent
+  background: transparent;
+}
+
+.server-list-container:nth-child(1) {
+  margin-top: 32px;
 }
 
 .server-list-container > ion-text {
@@ -25,4 +28,18 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
+}
+
+.server-list > .server-list-container {
+  margin-top: 0;
+}
+
+ion-item.info-card-container::part(native) {
+  border-radius: 12px;
+  padding: 0 16px;
+}
+
+ion-thumbnail {
+  --size: 30px;
+  --border-radius: 50%;
 }
