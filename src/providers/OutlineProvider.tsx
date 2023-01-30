@@ -84,12 +84,13 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
           value: JSON.stringify({ key: key, time: Date.now() }),
         });
         setStatus(OutlineStatus.connected);
+      } else {
+        await Preferences.set({
+          key: "currentKey",
+          value: JSON.stringify({ key: null }),
+        });
+        setStatus(OutlineStatus.disconnected);
       }
-      await Preferences.set({
-        key: "currentKey",
-        value: JSON.stringify({ key: null }),
-      });
-      setStatus(OutlineStatus.disconnected);
       return result;
     } catch (e) {
       console.log("Outline Start Error", e);
@@ -252,7 +253,7 @@ export const OutlineProvider = ({ children }: { children: ReactNode }) => {
     setStatus(OutlineStatus.connecting);
     const result = await Tunnel.isRunning();
     console.log("Outline isRunning", result);
-    if(!result) {
+    if (!result) {
       await Preferences.set({
         key: "currentKey",
         value: JSON.stringify({ key: null, time: null }),
