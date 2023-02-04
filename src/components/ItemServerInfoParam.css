@@ -14,7 +14,7 @@ ion-item.item-container ion-icon {
 }
 
 .info {
-  width: 108px;
+  min-width: 108px;
   margin-left: auto;
   height: 100%;
 }
